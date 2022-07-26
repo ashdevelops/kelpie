@@ -1,0 +1,10 @@
+Package: com.wyattgahm.relicloader
+Name: relicloader
+Depends: mobilesubstrate, com.wyattgahm.librelic
+Replaces: com.wyattgahm.shadowx
+Version: 4.0.2
+Architecture: iphoneos-arm
+Description: Wicked (relicloader)
+Maintainer: no5up
+Author: no5up
+Section: Development
