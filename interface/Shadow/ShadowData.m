@@ -46,10 +46,7 @@
     NSData *settingsData = [NSData dataWithContentsOfFile:settingspath];
     NSArray *settingsJSON = [NSJSONSerialization JSONObjectWithData: settingsData options: NSJSONReadingMutableContainers error: nil];
     self.prefs = [ShadowSetting makeSettings:settingsJSON];
-    
-    NSData *overridesData = [NSData dataWithContentsOfFile:overridespath];
-    NSArray *overridesJSON = [NSJSONSerialization JSONObjectWithData: overridesData options: NSJSONReadingMutableContainers error: nil];
-    self.overrides = [ShadowSetting makeSettings:overridesJSON];
+    self.overrides = nil;
     
     [self syncSettings];
     self.seen = FALSE;
