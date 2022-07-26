@@ -50,7 +50,6 @@
     
     [self syncSettings];
     self.seen = FALSE;
-    //self.server = [ShadowServerData dictionaryForURL:[NSURL URLWithString:SERVER]];
     [self save];
 }
 
