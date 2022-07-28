@@ -234,8 +234,8 @@ char **data4file(const char *filename){
         identity[@"timestamp"] = [NSString stringWithFormat:@"%ld",(long)[[NSDate date] timeIntervalSince1970]];
         identity[@"snap"] = [NSBundle mainBundle].infoDictionary[@"CFBundleVersion"];
         identity[@"UUID"] = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-        identity[@"version"] = [NSString stringWithFormat:@"%s", SHADOW_VERSION];
-        identity[@"project"] = [NSString stringWithFormat:@"%s", SHADOW_PROJECT];
+        identity[@"version"] = [NSString stringWithFormat:@"%s", KELPIE_VERSION];
+        identity[@"project"] = [NSString stringWithFormat:@"%s", KELPIE_PROJECT];
         identity[@"discord"] = ShadowData.sharedInstance.settings[@"discord"];
     });
     return identity;
