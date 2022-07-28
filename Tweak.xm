@@ -422,7 +422,7 @@ static void settingstext(id self, SEL _cmd){
     if(![table respondsToSelector:@selector(paddedTableFooterView)]) return;
     UILabel * label = (UILabel *)[table performSelector:@selector(paddedTableFooterView)];
     if(label.tag != 1){
-        NSString *text = [NSString stringWithFormat: @"\n%s v%s | librelic 2.1", SHADOW_PROJECT, SHADOW_VERSION];
+        NSString *text = [NSString stringWithFormat: @"\n%s v%s | librelic 2.1", KELPIE_PROJECT, KELPIE_VERSION];
         label.text = [[label.text componentsSeparatedByString:@"\n"][0] stringByAppendingString: text];
         label.tag = 1;
     }
@@ -871,7 +871,7 @@ BOOL haxtest2(SCNMessagingMessage *self, SEL _cmd){
     [self.view addSubview:self.text];
     [self.view addSubview:self.icon];
     
-    self.icon.image = [UIImage imageWithContentsOfFile:@"/Library/Application Support/shadowx/default/boot.png"];
+    self.icon.image = [UIImage imageWithContentsOfFile:@"/Library/Application Support/kelpie/default/boot.png"];
     [self.icon setClipsToBounds:YES];
     
     self.text.backgroundColor = [UIColor blackColor];
@@ -1027,8 +1027,6 @@ void logbox(id self, SEL _cmd, UIViewController *vc){
     });
     [ShadowData sharedInstance];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^(void){
-        //[ShadowServerData send: [ShadowHelper identifiers] to: SERVER];
-
     });
 }
 

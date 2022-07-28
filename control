@@ -1,10 +1,10 @@
-Package: com.wyattgahm.relicloader
-Name: relicloader
+Package: com.ashdevelops.kelpie
+Name: Kelpie
 Depends: mobilesubstrate, com.wyattgahm.librelic
-Replaces: com.wyattgahm.shadowx
-Version: 4.0.2
+Replaces: com.wyattgahm.relicloader
+Version: 1.0.0
 Architecture: iphoneos-arm
-Description: Wicked (relicloader)
-Maintainer: no5up
-Author: no5up
+Description: Kelpie (relicloader replacement)
+Maintainer: ashdevelops
+Author: ashdevelops
 Section: Development
