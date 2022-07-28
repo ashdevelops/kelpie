@@ -59,7 +59,7 @@
         }];
     }
 
-    NSString *projectName = [NSString stringWithCString:KELPIE_PROJECT encoding:NSASCIIStringEncoding];
+    NSString *projectName = [NSString stringWithCString:PROJECT_NAME encoding:NSASCIIStringEncoding];
 
     UINavigationItem* navItem = [[UINavigationItem alloc] initWithTitle: [projectName stringByAppendingString:@" Settings"]];
     UIBarButtonItem* more = [[UIBarButtonItem alloc] initWithTitle: @"More" style:UIBarButtonItemStylePlain target:self action:@selector(morePressed:)];
