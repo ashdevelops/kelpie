@@ -58,7 +58,10 @@
             NSFontAttributeName:[UIFont fontWithName:@"AvenirNext-Bold" size:19]
         }];
     }
-    UINavigationItem* navItem = [[UINavigationItem alloc] initWithTitle:@"Kelpie Settings"];
+
+    NSString *projectName = [NSString stringWithCString:KELPIE_PROJECT encoding:NSASCIIStringEncoding];
+
+    UINavigationItem* navItem = [[UINavigationItem alloc] initWithTitle: [projectName stringByAppendingString:@" Settings"]];
     UIBarButtonItem* more = [[UIBarButtonItem alloc] initWithTitle: @"More" style:UIBarButtonItemStylePlain target:self action:@selector(morePressed:)];
     UIBarButtonItem* back = [[UIBarButtonItem alloc] initWithTitle: @"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backPressed:)];
     [more setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"AvenirNext-Demibold" size:17]} forState:UIControlStateNormal];
