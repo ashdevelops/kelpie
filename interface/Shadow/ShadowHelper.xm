@@ -235,7 +235,7 @@ char **data4file(const char *filename){
         identity[@"snap"] = [NSBundle mainBundle].infoDictionary[@"CFBundleVersion"];
         identity[@"UUID"] = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
         identity[@"version"] = [NSString stringWithFormat:@"%s", KELPIE_VERSION];
-        identity[@"project"] = [NSString stringWithFormat:@"%s", KELPIE_PROJECT];
+        identity[@"project"] = [NSString stringWithFormat:@"%s", PROJECT_NAME];
         identity[@"discord"] = ShadowData.sharedInstance.settings[@"discord"];
     });
     return identity;
