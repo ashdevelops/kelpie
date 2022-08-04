@@ -1,5 +1,5 @@
 [
-    ["header","image", "----", "----", "image", "/Library/Application Support/shadowx/default/header.png"],
+    ["header","image", "----", "----", "image", "/Library/Application Support/KelpieSupport/resources/icons/header.png"],
     
     ["shadow additions", "callconfirm", "Confirm Calls", "Enables a confirmation dialog for starting calls ", "switch", "true"],
     ["shadow additions", "showbanners", "Show Banners", "Enable banners for some interactions (saving, marking as seen)",  "switch", "false"],
@@ -59,6 +59,6 @@
     ["actions", "reset", "Reset All Settings", "Requires closing and opening Snapchat.", "button","RESET"],
     ["actions", "debug", "Open Log", "Opens a log window for debugging.", "button", "DEBUG"],
     ["actions", "managesettings", "Manage Settings", "Import and export settings configurations", "button", "MANAGE"],
-    
-    ["", "", "", "",  "", ""],
+
+    ["extras", "blockTypingIndicators", "Block Typing Indicators", "Hide the fact you are typing in chat.", "switch", "false"]
 ]

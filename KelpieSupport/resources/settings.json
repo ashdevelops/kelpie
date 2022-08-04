@@ -1,8 +1,7 @@
 [
-    ["header","image", "----", "----", "image", "/Library/Application Support/shadowx/default/header.png"],
+    ["header","image", "----", "----", "image", "/Library/Application Support/KelpieSupport/resources/icons/header.png"],
     
     ["shadow additions", "callconfirm", "Confirm Calls", "Show a confirmation dialog before making calls", "switch", "true"],
-    ["shadow additions", "showbanners", "Show Banners", "Enable banners for some interactions", "switch", "false"],
     ["shadow additions", "nativeui", "No Buttons", "Integrate save and seen options into Snapchat action menu, instead of showing overlay buttons.", "switch", "false"],
     ["shadow additions", "savehax", "Savehax", "Fake-saving in chat", "switch", "false"],
     ["shadow additions", "closeseen", "Skip on Seen", "Skip to the next snap when marked as seen", "switch", "true"],
@@ -58,6 +57,8 @@
     ["actions", "debug", "Open Log", "Opens a log window for debugging.", "button", "DEBUG"],
     ["actions", "managesettings", "Manage Settings", "Import and export settings configurations", "button", "MANAGE"],
     ["actions", "reset", "Reset All Settings", "Requires closing and opening Snapchat.", "button","RESET"],
+
+    ["extras", "blockTypingIndicators", "Block Typing Indicators", "Hide the fact you are typing in chat.", "switch", "false"],
 
     ["", "", "", "", "", ""],
 ]
