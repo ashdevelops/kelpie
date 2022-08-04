@@ -869,7 +869,7 @@ BOOL haxtest2(SCNMessagingMessage *self, SEL _cmd){
     [self.view addSubview:self.text];
     [self.view addSubview:self.icon];
     
-    self.icon.image = [UIImage imageWithContentsOfFile:@"/Library/Application Support/kelpie/default/boot.png"];
+    self.icon.image = [UIImage imageWithContentsOfFile:@"/Library/Application Support/KelpieSupport/resources/icons/boot.png"];
     [self.icon setClipsToBounds:YES];
     
     self.text.backgroundColor = [UIColor blackColor];
