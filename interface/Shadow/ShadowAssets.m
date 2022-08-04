@@ -3,23 +3,21 @@
 @implementation ShadowAssets
 - (id)init{
     self = [super init];
-    NSString *theme = @"/Library/Application Support/kelpie/default/";
-    if([ShadowData sharedInstance].theme){
-        theme = [[@"/Library/Application Support/kelpie/" stringByAppendingString:[ShadowData sharedInstance].theme] stringByAppendingString:@"/"];
-    }
-    self.save = [UIImage imageWithContentsOfFile:[theme stringByAppendingString:@"save.png"]];
-    self.upload = [UIImage imageWithContentsOfFile:[theme stringByAppendingString:@"upload.png"]];
-    self.seen = [UIImage imageWithContentsOfFile:[theme stringByAppendingString:@"seen.png"]];
-    self.seened = [UIImage imageWithContentsOfFile:[theme stringByAppendingString:@"seened.png"]];
-    self.saved = [UIImage imageWithContentsOfFile:[theme stringByAppendingString:@"saved.png"]];
-    self.screenshot = [UIImage imageWithContentsOfFile:[theme stringByAppendingString:@"screenshot.png"]];
-    self.toolbar = [UIImage imageWithContentsOfFile:[theme stringByAppendingString:@"toolbar.png"]];
+    NSString *resourcePath = @"/Library/Application Support/KelpieSupport/resources/icons";
+
+    self.save = [UIImage imageWithContentsOfFile:[resourcePath stringByAppendingString:@"/save.png"]];
+    self.upload = [UIImage imageWithContentsOfFile:[resourcePath stringByAppendingString:@"/upload.png"]];
+    self.seen = [UIImage imageWithContentsOfFile:[resourcePath stringByAppendingString:@"/seen.png"]];
+    self.seened = [UIImage imageWithContentsOfFile:[resourcePath stringByAppendingString:@"/seened.png"]];
+    self.saved = [UIImage imageWithContentsOfFile:[resourcePath stringByAppendingString:@"/saved.png"]];
+    self.screenshot = [UIImage imageWithContentsOfFile:[resourcePath stringByAppendingString:@"/screenshot.png"]];
+    self.toolbar = [UIImage imageWithContentsOfFile:[resourcePath stringByAppendingString:@"/toolbar.png"]];
     
-    self.pull_normal = [UIImage imageWithContentsOfFile:[theme stringByAppendingString:@"pull.normal.png"]];
-    self.pull_wink = [UIImage imageWithContentsOfFile:[theme stringByAppendingString:@"pull.wink.png"]];
-    self.pull_shocked = [UIImage imageWithContentsOfFile:[theme stringByAppendingString:@"pull.shocked.png"]];
-    self.pull_rainbow = [UIImage imageWithContentsOfFile:[theme stringByAppendingString:@"pull.rainbow.png"]];
-    self.pull_hands = [UIImage imageWithContentsOfFile:[theme stringByAppendingString:@"pull.hands.png"]];
+    self.pull_normal = [UIImage imageWithContentsOfFile:[resourcePath stringByAppendingString:@"/pull.normal.png"]];
+    self.pull_wink = [UIImage imageWithContentsOfFile:[resourcePath stringByAppendingString:@"/pull.wink.png"]];
+    self.pull_shocked = [UIImage imageWithContentsOfFile:[resourcePath stringByAppendingString:@"/pull.shocked.png"]];
+    self.pull_rainbow = [UIImage imageWithContentsOfFile:[resourcePath stringByAppendingString:@"/pull.rainbow.png"]];
+    self.pull_hands = [UIImage imageWithContentsOfFile:[resourcePath stringByAppendingString:@"/pull.hands.png"]];
     
     return self;
 }
