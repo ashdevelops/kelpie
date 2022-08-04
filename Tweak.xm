@@ -289,13 +289,11 @@ static void loaded(id self, SEL _cmd){
         ShadowButton *uploadButton = [[ShadowButton alloc] initWithPrimaryImage:upload secondaryImage:nil identifier:@"upload" target:self action:@selector(upload)];
         [uploadButton addToVC: self];
     }
-    
-    
-    if(![ShadowAssets sharedInstance].upload && ![ShadowAssets sharedInstance].save){
-        [ShadowHelper banner:@"ERROR LOADING THEME" color:@"#FF0000"];
-    }else{
-        //[ShadowHelper banner:@"Shadow X - Powered by librelic 👻" color:@"#FF0F87"];
-    }
+
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(100000)), dispatch_get_main_queue(), ^(void){
+        [ShadowHelper banner:@"Kelpie - Powered by librelic" color:@"#FF0F87"];
+    });
 }
 
 
