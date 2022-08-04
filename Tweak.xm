@@ -887,6 +887,15 @@ BOOL haxtest2(SCNMessagingMessage *self, SEL _cmd){
 }
 @end
 
+void (*orig_blockTypingIndicators)(id self, SEL _cmd, id arg1);
+void blockTypingIndicators(id self, SEL _cmd, id arg1){
+    if ([ShadowData enabled: @"blockTypingIndicators"]) {
+        return;
+    }
+
+    orig_blockTypingIndicators(self, _cmd, arg1);
+}
+
 
 void (*orig_logbox)(id self, SEL _cmd, UIViewController *vc);
 void logbox(id self, SEL _cmd, UIViewController *vc){
@@ -928,8 +937,11 @@ void logbox(id self, SEL _cmd, UIViewController *vc){
     [[XLLogerManager manager] prepare];
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
+        RelicHookMessageEx(%c(SCChatViewControllerV3), @selector(_updateChatTypingStateWithState:), (void *)blockTypingIndicators, &orig_blockTypingIndicators);
+
         //Log window
         //RelicHookMessageEx(%c(SCApplicationWindow),@selector(setRootViewController:), (void *)logbox, &orig_logbox);
+        
         //URL opening
         RelicHookMessageEx(%c(SCURLAttachmentHandler),@selector(openURL:baseView:), (void *)openurl, &orig_openurl);
         RelicHookMessageEx(%c(SCContextV2BrowserPresenter),@selector(presentURL:preferExternal:metricParams:fromViewController:completion:), (void *)openurl2, &orig_openurl2);
