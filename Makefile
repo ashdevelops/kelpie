@@ -2,7 +2,7 @@ ARCHS = arm64 arm64e
 TARGET = iphone:clang:latest:14.0
 GO_EASY_ON_ME = 1
 THEOS_DEVICE_PORT = 22
-THEOS_DEVICE_IP = 192.168.1.152
+THEOS_DEVICE_IP = 192.168.1.207
 include $(THEOS)/makefiles/common.mk
 
 TWEAK_NAME = kelpie
