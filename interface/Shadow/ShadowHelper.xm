@@ -40,19 +40,15 @@ char **data4file(const char *filename){
     [[ShadowData sharedInstance] enable:@"screenshot"];
  }
 +(void)banner:(NSString*)text color:(NSString *)color alpha:(float)alpha{
-    if([ShadowData enabled: @"showbanners"]){
-        unsigned rgbValue = 0;
-        NSScanner *scanner = [NSScanner scannerWithString:color];
-        [scanner setScanLocation:1];
-        [scanner scanHexInt:&rgbValue];
-        UIColor * bannerColor = [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:alpha];
-        [%c(SCStatusBarOverlayLabelWindow) showMessageWithText:text backgroundColor:bannerColor];
-    }
+    unsigned rgbValue = 0;
+    NSScanner *scanner = [NSScanner scannerWithString:color];
+    [scanner setScanLocation:1];
+    [scanner scanHexInt:&rgbValue];
+    UIColor * bannerColor = [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:alpha];
+    [%c(SCStatusBarOverlayLabelWindow) showMessageWithText:text backgroundColor:bannerColor];
 }
 +(void)banner:(NSString*)text color:(NSString *)color{
-    if([ShadowData enabled: @"showbanners"]){
-        [self banner:text color:color alpha:.75];
-    }
+    [self banner:text color:color alpha:.92];
 }
 +(void)debug{
     [[XLLogerManager manager] showOnWindow];
