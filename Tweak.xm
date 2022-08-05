@@ -420,7 +420,7 @@ static void settingstext(id self, SEL _cmd){
     if(![table respondsToSelector:@selector(paddedTableFooterView)]) return;
     UILabel * label = (UILabel *)[table performSelector:@selector(paddedTableFooterView)];
     if(label.tag != 1){
-        NSString *text = [NSString stringWithFormat: @"\n%s v%s | librelic 2.1", PROJECT_NAME, KELPIE_VERSION];
+        NSString *text = [NSString stringWithFormat: @"\n%s v%s | librelic 2.1", PROJECT_NAME, PROJECT_VERSION];
         label.text = [[label.text componentsSeparatedByString:@"\n"][0] stringByAppendingString: text];
         label.tag = 1;
     }
