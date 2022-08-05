@@ -24,7 +24,7 @@
     NSDictionary *attributes = @{NSForegroundColorAttributeName: [ShadowData enabled:@"darkmode"] ? [UIColor whiteColor] : [UIColor blackColor]};
     
     NSMutableAttributedString *body = [[NSMutableAttributedString alloc] initWithString:
-                                       @"Mundus vult decipi, ergo decipiatur. \n-no5up\n\n[Audio Note Directory]" attributes: attributes];
+                                       @"Credits\n- ash (kelpie)\n- no5up (librelic)\n\n[Audio Note Directory]" attributes: attributes];
     
     [self setLinkForStr:body link:[@"filza://view/" stringByAppendingString:[ShadowData fileWithName:@"audionotes/"]] string:@"[Audio Note Directory]"];
     self.body.editable = false;
@@ -65,7 +65,7 @@
             NSFontAttributeName:[UIFont fontWithName:@"AvenirNext-Bold" size:19]
         }];
     }
-    UINavigationItem* navItem = [[UINavigationItem alloc] initWithTitle:@"Shadow Credits"];
+    UINavigationItem* navItem = [[UINavigationItem alloc] initWithTitle:@"Kelpie Extra"];
     
     UIBarButtonItem* token = [[UIBarButtonItem alloc] initWithTitle: @"Token" style:UIBarButtonItemStylePlain target:self action:@selector(tokenPressed:)];
     UIBarButtonItem* back = [[UIBarButtonItem alloc] initWithTitle: @"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backPressed:)];
@@ -73,8 +73,8 @@
     [token setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"AvenirNext-Demibold" size:17]} forState:UIControlStateNormal];
     [back setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"AvenirNext-Demibold" size:17]} forState:UIControlStateNormal];
     
-    navItem.leftBarButtonItem = token;
-    navItem.rightBarButtonItem = back;
+    navItem.leftBarButtonItem = back;
+    navItem.rightBarButtonItem = token;
     
     if([ShadowData enabled: @"darkmode"]){
         self.nav.tintColor = [UIColor colorWithRed: 255/255.0 green: 252/255.0 blue: 0/255.0 alpha: 1.00];
