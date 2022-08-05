@@ -1,3 +1,6 @@
+echo "[*] Deleting old resources..."
+ssh root@192.168.1.207 "rm -R /Library/Application\ Support/KelpieSupport"
+
 echo "[*] Copying resources..."
 scp -r "KelpieSupport" root@192.168.1.207:"/Library/Application Support/KelpieSupport"
 
