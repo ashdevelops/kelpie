@@ -24,7 +24,7 @@ typedef void(^URLHandler)(NSURL * url);
     _picker = [[UIImagePickerController alloc] init];
     _picker.videoExportPreset = AVAssetExportPresetPassthrough;
     _picker.delegate = self;
-    //_picker.allowsEditing = YES;
+    _picker.allowsEditing = YES;
     _picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     _picker.mediaTypes = [NSArray arrayWithObjects:(NSString *)kUTTypeMovie, (NSString *)kUTTypeImage, nil];
     
