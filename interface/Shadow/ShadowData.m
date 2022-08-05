@@ -28,20 +28,10 @@
         self.positions.layout = [ShadowLayout defaultLayout];
     }
     
-    if(self.theme){
-        settingspath = [[[@"/Library/Application Support/shadowx/" stringByAppendingString:self.theme] stringByAppendingString:@"/"] stringByAppendingString:@"settings.json"];
-        if(![[NSFileManager defaultManager] fileExistsAtPath:settingspath]){
-            settingspath = @"/Library/Application Support/shadowx/default/settings.json";
-        }
-        
-        overridespath = [[[@"/Library/Application Support/shadowx/" stringByAppendingString:self.theme] stringByAppendingString:@"/"] stringByAppendingString:@"overrides.json"];
-        if(![[NSFileManager defaultManager] fileExistsAtPath:overridespath]){
-            overridespath = @"/Library/Application Support/shadowx/default/overrides.json";
-        }
-    }else{
-        overridespath = @"/Library/Application Support/shadowx/default/overrides.json";
-        settingspath = @"/Library/Application Support/shadowx/default/settings.json";
-    }
+    NSString *resourcePath = @"/Library/Application Support/kelpie";
+
+    overridespath = [resourcePath stringByAppendingString:@"/resources/overrides.json"];
+    settingspath = [resourcePath stringByAppendingString:@"/resources/settings.json"];
     
     NSData *settingsData = [NSData dataWithContentsOfFile:settingspath];
     NSArray *settingsJSON = [NSJSONSerialization JSONObjectWithData: settingsData options: NSJSONReadingMutableContainers error: nil];
