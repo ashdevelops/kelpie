@@ -27,11 +27,11 @@
     if(self.positions.layout.count == 0){
         self.positions.layout = [ShadowLayout defaultLayout];
     }
-    
-    NSString *resourcePath = @"/Library/Application Support/kelpie";
 
-    overridespath = [resourcePath stringByAppendingString:@"/resources/overrides.json"];
-    settingspath = [resourcePath stringByAppendingString:@"/resources/settings.json"];
+    NSString *resourcePath = @"/Library/Application Support/KelpieSupport/resources";
+
+    overridespath = [resourcePath stringByAppendingString:@"/overrides.json"];
+    settingspath = [resourcePath stringByAppendingString:@"/settings.json"];
     
     NSData *settingsData = [NSData dataWithContentsOfFile:settingspath];
     NSArray *settingsJSON = [NSJSONSerialization JSONObjectWithData: settingsData options: NSJSONReadingMutableContainers error: nil];

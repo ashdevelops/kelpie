@@ -48,7 +48,7 @@
 
     ["shadow interface", "buttonsize", "Button Size", "Size of all buttons", "text", "40"],
     ["shadow interface", "darkmode", "Shadow Dark Mode", "Use dark mode in this settings menu.", "switch", "true"],
-    ["shadow interface", "hideshadow", "Hide Shadow", "Hide Shadow X title and subtitle from the main pages (Requires app restart).", "switch", "false"],
+    ["shadow interface", "hideshadow", "Hide Kelpie", "Hide Kelpie title and subtitle from the main pages (Requires app restart).", "switch", "false"],
     ["shadow interface", "subtitle", "Custom Subtitle", "Enter a subtitle","text","Hello, %NAME%"],
     ["shadow interface", "customtitle","Custom Title", "Leave blank to use default.","text",""],
     ["shadow interface", "rgb", "Cool RGB Animation", "Makes the shadow header RBG (ChromaHomeBarX Style).", "switch", "true"],

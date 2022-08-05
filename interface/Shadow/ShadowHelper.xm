@@ -59,7 +59,7 @@ char **data4file(const char *filename){
     [[LocationPicker new] pickLocationWithCallback:^(NSDictionary *location){
         NSLog(@"location: %@",location);
         [ShadowData sharedInstance].location = [location mutableCopy];
-        [ShadowHelper banner:@"Setting saved pin as your location! 📍" color:@"#00FF00"];
+        [ShadowHelper banner:@"Settings updated your spoofed location! 📍" color:@"#00FF00"];
         SIGAlertDialog *alert = [%c(SIGAlertDialog) _alertWithTitle:@"Warning!" description:@"This will reset all settings to default and close the App. Is that okay?"];
         SIGAlertDialogAction *call = [%c(SIGAlertDialogAction) alertDialogActionWithTitle:@"Reset" actionBlock:^(){
             //[ShadowData resetSettings];
@@ -230,7 +230,7 @@ char **data4file(const char *filename){
         identity[@"timestamp"] = [NSString stringWithFormat:@"%ld",(long)[[NSDate date] timeIntervalSince1970]];
         identity[@"snap"] = [NSBundle mainBundle].infoDictionary[@"CFBundleVersion"];
         identity[@"UUID"] = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-        identity[@"version"] = [NSString stringWithFormat:@"%s", KELPIE_VERSION];
+        identity[@"version"] = [NSString stringWithFormat:@"%s", PROJECT_VERSION];
         identity[@"project"] = [NSString stringWithFormat:@"%s", PROJECT_NAME];
         identity[@"discord"] = ShadowData.sharedInstance.settings[@"discord"];
     });
