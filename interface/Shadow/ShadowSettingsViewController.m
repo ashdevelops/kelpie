@@ -62,12 +62,12 @@
     NSString *projectName = [NSString stringWithCString:PROJECT_NAME encoding:NSASCIIStringEncoding];
 
     UINavigationItem* navItem = [[UINavigationItem alloc] initWithTitle: [projectName stringByAppendingString:@" Settings"]];
-    UIBarButtonItem* more = [[UIBarButtonItem alloc] initWithTitle: @"More" style:UIBarButtonItemStylePlain target:self action:@selector(morePressed:)];
+    UIBarButtonItem* more = [[UIBarButtonItem alloc] initWithTitle: @"Extra" style:UIBarButtonItemStylePlain target:self action:@selector(morePressed:)];
     UIBarButtonItem* back = [[UIBarButtonItem alloc] initWithTitle: @"Back" style:UIBarButtonItemStylePlain target:self action:@selector(backPressed:)];
     [more setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"AvenirNext-Demibold" size:17]} forState:UIControlStateNormal];
     [back setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:@"AvenirNext-Demibold" size:17]} forState:UIControlStateNormal];
-    navItem.leftBarButtonItem = more;
-    navItem.rightBarButtonItem = back;
+    navItem.leftBarButtonItem = back;
+    navItem.rightBarButtonItem = more;
     [nav setItems:@[navItem]];
     [nav layoutSubviews];
     
