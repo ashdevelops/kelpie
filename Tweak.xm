@@ -291,8 +291,9 @@ static void loaded(id self, SEL _cmd){
     }
 
 
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(100000)), dispatch_get_main_queue(), ^(void){
-        [ShadowHelper banner:@"Kelpie - Powered by librelic" color:@"#FF0F87"];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1000000000 / 2)), dispatch_get_main_queue(), ^(void){
+        NSString *welcomeMessage = [NSString stringWithFormat: @"%s %s has been loaded!", PROJECT_NAME, PROJECT_VERSION];
+        [ShadowHelper banner:welcomeMessage color:@"#FF0F87"];
     });
 }
 
