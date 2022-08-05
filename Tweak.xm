@@ -159,7 +159,7 @@ static void markheader(id self, SEL _cmd, NSUInteger arg1){
             if([ShadowData enabled: @"customtitle"]){
                 ((SIGHeaderItem*)[self performSelector:@selector(currentHeaderItem)]).title = [ShadowData sharedInstance].settings[@"customtitle"];
             }else{
-                ((SIGHeaderItem*)[self performSelector:@selector(currentHeaderItem)]).title = @"Shadow X";
+                ((SIGHeaderItem*)[self performSelector:@selector(currentHeaderItem)]).title = @"Kelpie";
             }
         }
         
