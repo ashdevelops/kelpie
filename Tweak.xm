@@ -938,6 +938,7 @@ void logbox(id self, SEL _cmd, UIViewController *vc){
     [[XLLogerManager manager] prepare];
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
+        // Kelpie
         RelicHookMessageEx(%c(SCChatViewControllerV3), @selector(_updateChatTypingStateWithState:), (void *)blockTypingIndicators, &orig_blockTypingIndicators);
 
         //Log window
