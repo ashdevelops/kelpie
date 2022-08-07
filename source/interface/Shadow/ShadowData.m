@@ -16,7 +16,6 @@
 
 -(void)setup{
     NSString *settingspath;
-    NSString *overridespath;
     self.saveaudio = NO;
     if(!self.settings){
         self.settings = [NSMutableDictionary new];
@@ -30,7 +29,6 @@
 
     NSString *resourcePath = @"/Library/Application Support/KelpieSupport/resources";
 
-    overridespath = [resourcePath stringByAppendingString:@"/overrides.json"];
     settingspath = [resourcePath stringByAppendingString:@"/settings.json"];
     
     NSData *settingsData = [NSData dataWithContentsOfFile:settingspath];
