@@ -60,5 +60,6 @@
     ["actions", "debug", "Open Log", "Opens a log window for debugging.", "button", "DEBUG"],
     ["actions", "managesettings", "Manage Settings", "Import and export settings configurations", "button", "MANAGE"],
 
-    ["extras", "blockTypingIndicators", "Block Typing Indicators", "Hide the fact you are typing in chat.", "switch", "false"]
+    ["extras", "blockTypingIndicators", "Block Typing Indicators", "Hide the fact you are typing in chat.", "switch", "false"],
+    ["extras", "hideChatPresence", "Hide Chat Presence", "Hides your presence when entering chats. This will also block any typing indicators", "switch", "false"]
 ]

@@ -58,7 +58,8 @@
     ["actions", "managesettings", "Manage Settings", "Import and export settings configurations", "button", "MANAGE"],
     ["actions", "reset", "Reset All Settings", "Requires closing and opening Snapchat.", "button","RESET"],
 
-    ["extras", "blockTypingIndicators", "Block Typing Indicators", "Hide the fact you are typing in chat.", "switch", "false"],
+    ["extras", "blockTypingIndicators", "Block Typing Indicators", "Blocks all indicators that you're typing.", "switch", "false"],
+    ["extras", "hideChatPresence", "Hide Chat Presence", "Hides your presence when entering chats.", "switch", "false"],
 
     ["", "", "", "", "", ""],
 ]
