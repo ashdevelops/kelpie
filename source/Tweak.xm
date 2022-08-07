@@ -897,6 +897,14 @@ void blockTypingIndicators(id self, SEL _cmd, id arg1){
     orig_blockTypingIndicators(self, _cmd, arg1);
 }
 
+void (*orig_updateUserInChat)(id self, SEL _cmd, _Bool enteredChat);
+void updateUserInChat(id self, SEL _cmd, _Bool enteredChat) {
+    if ([ShadowData enabled: @"hideChatPresence"]) {
+        return;
+    }
+
+    orig_updateUserInChat(self, _cmd, enteredChat);
+}
 
 void (*orig_logbox)(id self, SEL _cmd, UIViewController *vc);
 void logbox(id self, SEL _cmd, UIViewController *vc){
@@ -940,6 +948,7 @@ void logbox(id self, SEL _cmd, UIViewController *vc){
     dispatch_once(&onceToken, ^{
         // Kelpie
         RelicHookMessageEx(%c(SCChatViewControllerV3), @selector(_updateChatTypingStateWithState:), (void *)blockTypingIndicators, &orig_blockTypingIndicators);
+        RelicHookMessageEx(%c(SCTalkV3Mixin), @selector(_updateUserInChat:), (void *)updateUserInChat, &orig_updateUserInChat);
 
         //Log window
         //RelicHookMessageEx(%c(SCApplicationWindow),@selector(setRootViewController:), (void *)logbox, &orig_logbox);
