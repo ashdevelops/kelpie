@@ -932,18 +932,16 @@ void logbox(id self, SEL _cmd, UIViewController *vc){
 
 
 void removeMenuItemByPhrase(NSString* phrase, NSMutableArray* items) {
-    int count = [items count];
-    for (NSInteger i = 0; i < count; i++) {
+    for (NSInteger i = 0; i < [items count]; i++) {
         SIGActionSheetCell *sheetCell = items[i];
-        NSString *title = MSHookIvar<SIGLabel *>(sheetCell, "_textLabel").text;
+        NSString *text = MSHookIvar<SIGLabel *>(sheetCell, "_textLabel").text;
 
-        if ([title rangeOfString:phrase].location != NSNotFound) {
+        if ([text rangeOfString:phrase].location != NSNotFound) {
             [items removeObject: sheetCell];
             break;
         }
     }
 }
-
 
 void (*orig_hidePinBestFriendOption)(id self, SEL _cmd, id arg1, id title, id headerItem, id footerItem);
 void hidePinBestFriendOption(id self, SEL _cmd, id arg1, id title, id headerItem, id footerItem) {
