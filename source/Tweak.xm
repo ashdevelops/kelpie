@@ -931,9 +931,30 @@ void logbox(id self, SEL _cmd, UIViewController *vc){
 }
 
 
+void removeMenuItemByPhrase(NSString* phrase, NSMutableArray* items) {
+    NSInteger count = [actionItems count];
+    for (NSInteger i = 0; i < count; i++) {
+        SIGActionSheetCell *sheetCell = items[i];
+        NSString *title = MSHookIvar<SIGLabel *>(sheetCell, "_textLabel").text;
+
+        if ([title rangeOfString:phrase].location != NSNotFound) {
+            [items removeObject: sheetCell];
+            break;
+        }
+    }
+}
 
 
+void (*orig_hidePinBestFriendOption)(id self, SEL _cmd, id arg1, id title, id headerItem, id footerItem);
+void hidePinBestFriendOption(id self, SEL _cmd, id arg1, id title, id headerItem, id footerItem) {
+    orig_hidePinBestFriendOption(self, _cmd, arg1, title, headerItem, footerItem);
 
+    NSMutableArray *actionItems = MSHookIvar<NSMutableArray *>(self, "_actionItems");
+
+    removeMenuItemByPhrase(@"as your No.1 BFF", actionItems);
+    removeMenuItemByPhrase(@"Location Settings", actionItems);
+    removeMenuItemByPhrase(@"Story Settings", actionItems);
+}
 
 
 %ctor{
@@ -949,6 +970,7 @@ void logbox(id self, SEL _cmd, UIViewController *vc){
         // Kelpie
         RelicHookMessageEx(%c(SCChatViewControllerV3), @selector(_updateChatTypingStateWithState:), (void *)blockTypingIndicators, &orig_blockTypingIndicators);
         RelicHookMessageEx(%c(SCTalkV3Mixin), @selector(_updateUserInChat:), (void *)updateUserInChat, &orig_updateUserInChat);
+        RelicHookMessageEx(%c(SIGActionSheet), @selector(initWithActionItems:title:headerItem:footerItem:), (void *)hidePinBestFriendOption, &orig_hidePinBestFriendOption);
 
         //Log window
         //RelicHookMessageEx(%c(SCApplicationWindow),@selector(setRootViewController:), (void *)logbox, &orig_logbox);
