@@ -932,7 +932,7 @@ void logbox(id self, SEL _cmd, UIViewController *vc){
 
 
 void removeMenuItemByPhrase(NSString* phrase, NSMutableArray* items) {
-    NSInteger count = [actionItems count];
+    int count = [items count];
     for (NSInteger i = 0; i < count; i++) {
         SIGActionSheetCell *sheetCell = items[i];
         NSString *title = MSHookIvar<SIGLabel *>(sheetCell, "_textLabel").text;
