@@ -19,12 +19,8 @@
     
     ["shadow experiments", "noads", "Disable Ads", "Block all Snapchat advertisements.", "switch", "true"],
     ["shadow experiments", "sctesting", "Enable Experiments", "Enable all snapchat experiments (like UI stuff)", "switch", "false"],
-    ["shadow experiments", "lockbuttons", "Lock Buttons", "Lock the position of the buttons and disable movement.", "switch", "true"],
-    ["shadow experiments", "resetlayout", "Reset Button Layout", "Restore button positions to default configuration.", "button", "RESTORE"],
     ["shadow experiments", "keepchat", "Ignore deleted chats", "Stop chats from being deleted (only works while chat is open).", "switch", "true"],
     ["shadow experiments", "saveaudio", "Save Voice Messages", "Show a confirmation dialog to save a voice-message to a folder (must listen to the whole voice-message first).", "switch", "true"],
-    ["shadow experiments", "wraithuploads", "Long Uploads", "Upload videos longer than 10sec as one snap (Must take a quick video snap after choosing a video).", "switch", "false"],
-    ["shadow experiments", "nomoji", "No Bitmojis", "Do not render bitmojis",  "switch", "false"],
     ["shadow experiments", "toolbarbtn", "Toolbar Button", "Add a toolbar button with shadow icon",  "switch", "true"],
     
     ["spoof", "location", "Spoof Location", "Use the location selector below to change location.", "switch", "false"],
@@ -54,12 +50,12 @@
     ["shadow interface", "rgb", "Cool RGB Animation", "Makes the shadow header RBG (ChromaHomeBarX Style).", "switch", "true"],
     ["shadow interface", "theme", "Shadow Theme", "Pick a theme for shadow's buttons, pull to refresh, and settings.", "button", "SELECT"],
 
+    ["extras", "blockTypingIndicators", "Block Typing Indicators", "Blocks all indicators that you're typing.", "switch", "false"],
+    ["extras", "hideChatPresence", "Hide Chat Presence", "Hides your presence when entering chats.", "switch", "false"],
+
     ["actions", "debug", "Open Log", "Opens a log window for debugging.", "button", "DEBUG"],
     ["actions", "managesettings", "Manage Settings", "Import and export settings configurations", "button", "MANAGE"],
     ["actions", "reset", "Reset All Settings", "Requires closing and opening Snapchat.", "button","RESET"],
 
-    ["extras", "blockTypingIndicators", "Block Typing Indicators", "Blocks all indicators that you're typing.", "switch", "false"],
-    ["extras", "hideChatPresence", "Hide Chat Presence", "Hides your presence when entering chats.", "switch", "false"],
-
-    ["", "", "", "", "", ""],
+    ["", "", "", "", "", ""]
 ]

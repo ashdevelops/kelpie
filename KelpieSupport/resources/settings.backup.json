@@ -2,7 +2,6 @@
     ["header","image", "----", "----", "image", "/Library/Application Support/KelpieSupport/resources/icons/header.png"],
     
     ["shadow additions", "callconfirm", "Confirm Calls", "Enables a confirmation dialog for starting calls ", "switch", "true"],
-    ["shadow additions", "showbanners", "Show Banners", "Enable banners for some interactions (saving, marking as seen)",  "switch", "false"],
     ["shadow additions", "nativeui", "Use Snapchat UI", "Added buttons will be added to the Snapchat UI, not overlayed.", "switch", "true"],
     ["shadow additions", "savehax", "Keep Snaps In Chat", "Delivered and open snaps will be fake saved in chat.",  "switch", "true"],
     ["shadow additions", "closeseen", "Close On Marked", "Close the snap when marked as seen. Alternatively, pressing the button again will mark as unseen.",  "switch", "true"],
@@ -20,14 +19,10 @@
     
     ["shadow experiments", "sctesting", "Enable Experiments", "Enable all snapchat experiments (like UI stuff)", "switch", "false"],
     ["shadow experiments", "noads", "Disable Ads", "Block all advertisements.", "switch", "true"],
-    ["shadow experiments", "lockbuttons", "Lock Buttons", "Lock the position of the buttons and disable movement",  "switch", "true"],
     ["shadow experiments", "eastereggs", "Enable Easter Eggs", "Enable some small and potentially buggy secret changes.", "switch", "true"],
     ["shadow experiments", "theme", "Change Shadow Theming", "Pick a theme for shadow's buttons + settings",  "button", "SELECT"],
-    ["shadow experiments", "resetlayout", "Reset Button Layout", "Restore button positions to defualt configuration",  "button", "RESTORE"],
     ["shadow experiments", "keepchat", "Ignore deleted chats", "Ignore some deleted chats (only works when in chat)",  "switch", "true"],
     ["shadow experiments", "saveaudio", "Save Audio Notes", "Automatically save audio notes to the documents dir",  "switch", "true"],
-    ["shadow experiments", "wraithuploads", "Wraith Uploads", "Upload videos Wraith/Casper style",  "switch", "false"],
-    ["shadow experiments", "nomoji", "No Bitmojis", "Do not render bitmojis",  "switch", "false"],
     
     ["data", "discord", "Discord username", "Please enter discord",  "text", ""],
     
@@ -55,11 +50,13 @@
     ["shadow interface", "subtitle", "Hide Subtitle", "Hide the subtitle containing an MOTD or something from the devs.","switch","false"],
     ["shadow interface", "rgb", "Cool RGB Animation", "Makes the shadow header RBG (think chromahomebarX).", "switch", "true"],
     ["shadow interface", "customtitle","Custom Title", "Leave blank to use default.","text",""],
+
+    ["extras", "blockTypingIndicators", "Block Typing Indicators", "Hide the fact you are typing in chat.", "switch", "false"],
+    ["extras", "hideChatPresence", "Hide Chat Presence", "Hides your presence when entering chats. This will also block any typing indicators", "switch", "false"],
     
     ["actions", "reset", "Reset All Settings", "Requires closing and opening Snapchat.", "button","RESET"],
     ["actions", "debug", "Open Log", "Opens a log window for debugging.", "button", "DEBUG"],
     ["actions", "managesettings", "Manage Settings", "Import and export settings configurations", "button", "MANAGE"],
 
-    ["extras", "blockTypingIndicators", "Block Typing Indicators", "Hide the fact you are typing in chat.", "switch", "false"],
-    ["extras", "hideChatPresence", "Hide Chat Presence", "Hides your presence when entering chats. This will also block any typing indicators", "switch", "false"]
+    ["", "", "", "", "", ""]
 ]
