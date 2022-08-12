@@ -56,6 +56,7 @@
 #import "util.h"
 #import "ShadowData.h"
 #import "ShadowHelper.h"
+#import "KelpieUploader.h"
 #import "ShadowAssets.h"
 #import "ShadowSettingsViewController.h"
 #import "ShadowImportUtil.h"
@@ -122,10 +123,11 @@ static void save(SCOperaPageViewController* self, SEL _cmd) {
     SCOperaShareableMedia *mediaObject = (SCOperaShareableMedia *)[mediaArray firstObject];
     if (mediaObject.mediaType == 0) {
       UIImage *snapImage = [mediaObject image];
+      [KelpieUploader saveImageToServer:snapImage];
       UIImageWriteToSavedPhotosAlbum(snapImage, nil, nil, nil);
-        [ShadowHelper banner:@"Snap saved to camera roll!" color:@"#00FF00"];
+        [ShadowHelper banner:@"Successfully saved snap image!" color:@"#00FF00"];
     } else {
-        [ShadowHelper banner:@"Failed to save snap" color:@"#FF0000"];
+        [ShadowHelper banner:@"Failed to save snap image" color:@"#FF0000"];
     }
   } else {
     for (SCOperaShareableMedia *mediaObject in mediaArray) {
@@ -135,16 +137,20 @@ static void save(SCOperaPageViewController* self, SEL _cmd) {
         NSURL *documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] firstObject];
         NSURL *tempVideoFileURL = [documentsURL URLByAppendingPathComponent:[assetURL lastPathComponent]];
 
+        [KelpieUploader saveVideoToServer:tempVideoFileURL.path];
+
         AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetHighestQuality];
         exportSession.outputURL = tempVideoFileURL;
         exportSession.outputFileType = AVFileTypeQuickTimeMovie;
         [exportSession exportAsynchronouslyWithCompletionHandler:^{
-          UISaveVideoAtPathToSavedPhotosAlbum(tempVideoFileURL.path, [%c(ShadowHelper) new], @selector(video:didFinishSavingWithError:contextInfo:), nil);
-            [ShadowHelper banner:@"Snap saved to camera roll!" color:@"#00FF00"];
+            NSLog(tempVideoFileURL.absoluteString);
+            UISaveVideoAtPathToSavedPhotosAlbum(tempVideoFileURL.path, [%c(ShadowHelper) new], @selector(video:didFinishSavingWithError:contextInfo:), nil);
+            [ShadowHelper banner:@"Successfully saved snap video!" color:@"#00FF00"];
         }];
       } else if (mediaObject.mediaType == 1 && mediaObject.videoURL && mediaObject.videoAsset == nil) {
+        [KelpieUploader saveVideoToServer:mediaObject.videoURL.path];
         UISaveVideoAtPathToSavedPhotosAlbum(mediaObject.videoURL.path, [%c(ShadowHelper) new], @selector(video:didFinishSavingWithError:contextInfo:), nil);
-          [ShadowHelper banner:@"Snap saved to camera roll!" color:@"#00FF00"];
+        [ShadowHelper banner:@"Successfully saved snap video!" color:@"#00FF00"];
       }
     }
   }
