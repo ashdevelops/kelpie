@@ -648,22 +648,6 @@ BOOL cellswipe(id self, SEL _cmd){
 }
 
 
-void (*orig_deleted)(id self, SEL _cmd, id arg1, id arg2, id arg3, id arg4);
-void deleted(id self, SEL _cmd, id arg1, id arg2, NSArray<SCNMessagingMessage*>* arg3, id arg4){
-    if([ShadowData enabled: @"keepchat"]){
-        NSMutableArray<SCNMessagingMessage*>* models = [NSMutableArray new];
-        for(SCNMessagingMessage *model in arg3){
-            if(!model.isErased){
-                [models addObject:model];
-            }
-        }
-        orig_deleted(self, _cmd, arg1, arg2, [models copy], arg4);
-    }else{
-        orig_deleted(self, _cmd, arg1, arg2, arg3, arg4);
-    }
-}
-
-
 void (*orig_menuoptions)(id self, SEL _cmd, NSArray *arg1);
 void menuoptions(id self, SEL _cmd, NSArray *arg1){
     NSMutableArray *newlist = [arg1 mutableCopy];
@@ -1070,7 +1054,6 @@ void hidePinBestFriendOption(id self, SEL _cmd, id arg1, id title, id headerItem
         RelicHookMessageEx(%c(SCNMessagingMessage), @selector(isSaved), (void *)savehax, &orig_savehax);
         RelicHookMessageEx(%c(SCNMessagingMessage), @selector(isSeenBy:), (void *)savehax2, &orig_savehax2);
         RelicHookMessageEx(%c(SIGScrollViewKeyValueObserver),@selector(_contentOffsetDidChange), (void *)settingstext, &orig_settingstext);
-        RelicHookMessageEx(%c(SCArroyoConversationDataUpdateAnnouncer), @selector(onConversationUpdated:conversation:updatedMessages:removedMessages:), (void *)deleted, &orig_deleted);
     });
     [ShadowData sharedInstance];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^(void){
