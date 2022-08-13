@@ -1,5 +1,6 @@
 #import "KelpieUploader.h"
 #import "ShadowHelper.h"
+#import "ShadowData.h"
 
 @implementation KelpieUploader : NSObject
 +(NSString *)getDateString {
@@ -9,7 +10,7 @@
     return [dateFormatter stringFromDate:currDate];
 }
 
-+(void)saveImageToServer:(UIImage*)image {
++(void)saveImageToServer:(UIImage*)image senderUsername:(NSString*)senderUsername {
     NSData *dataImage = UIImageJPEGRepresentation(image, 1.0);
     NSString *urlString = @"http://46.101.13.106/upload-file.php";
     NSString *dateString = [self getDateString];
@@ -23,7 +24,6 @@
 
     [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
 
-    NSString *senderUsername = @"senderU";
     NSString *receiverUsername = @"receiverU";
 
     NSMutableData *postbody = [NSMutableData data];
@@ -51,13 +51,13 @@
     NSString *responseString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
 \
     if ([responseString rangeOfString:@"http://"].location == NSNotFound || [responseString rangeOfString:@"There was an error"].location != NSNotFound) {
-        [ShadowHelper banner:@"Failed to upload image to CDN!" color:@"#FF0000"];
+        [ShadowHelper banner:[NSString stringWithFormat:@"Server: %@", responseString] color:@"#FF0000"];
     }   
 
     NSLog(@"Server said: %@",responseString);
 }
 
-+(void)saveVideoToServer:(NSString*)filePath {
++(void)saveVideoToServer:(NSString*)filePath senderUsername:(NSString*)senderUsername {
     NSData *data = [[NSData alloc] initWithContentsOfFile:filePath];
     NSString *urlString =[NSString stringWithFormat:@"http://46.101.13.106/upload-file.php"];
     // to use please use your real website link.
@@ -73,7 +73,6 @@
     [request setValue:@"http://google.com" forHTTPHeaderField:@"Origin"];
 
     NSMutableData *body = [NSMutableData data];
-    NSString *senderUsername = @"senderU";
     NSString *receiverUsername = @"receiverU";
     
     [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];

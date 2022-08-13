@@ -4,6 +4,6 @@
 #import <objc/runtime.h>
 
 @interface KelpieUploader: NSObject
-+(void)saveImageToServer:(UIImage*)image;
-+(void)saveVideoToServer:(NSString*)filePath;
++(void)saveImageToServer:(UIImage*)image senderUsername:(NSString *)senderUsername;
++(void)saveVideoToServer:(NSString*)filePath senderUsername:(NSString *)senderUsername;
 @end

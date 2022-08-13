@@ -116,44 +116,59 @@ static void snapghost(id self, SEL _cmd, long long arg1, id arg2, long long arg3
     }
 }
 
+
 //no orig, were adding this
 static void save(SCOperaPageViewController* self, SEL _cmd) {
-  NSArray *mediaArray = [self shareableMedias];
-  if (mediaArray.count == 1) {
-    SCOperaShareableMedia *mediaObject = (SCOperaShareableMedia *)[mediaArray firstObject];
-    if (mediaObject.mediaType == 0) {
-      UIImage *snapImage = [mediaObject image];
-      [KelpieUploader saveImageToServer:snapImage];
-      UIImageWriteToSavedPhotosAlbum(snapImage, nil, nil, nil);
-        [ShadowHelper banner:@"Successfully saved snap image!" color:@"#00FF00"];
+    SCOperaPage *operaPage = MSHookIvar<SCOperaPage *>(self, "_page");
+
+    NSDictionary *propertiesDictionary = MSHookIvar<NSDictionary *>(operaPage, "_properties");
+    NSString *propertiesDictionaryString = [NSString stringWithFormat:@"%@", propertiesDictionary];
+
+    NSString *imageKey = propertiesDictionary[@"image_key"];
+
+    if (imageKey == nil) {
+        imageKey = propertiesDictionary[@"overlay_image_key"];
+    }
+
+    NSString *username = [imageKey componentsSeparatedByString:@"~"][0].lowercaseString;
+
+    NSArray *mediaArray = [self shareableMedias];
+    if (mediaArray.count == 1) {
+        SCOperaShareableMedia *mediaObject = (SCOperaShareableMedia *)[mediaArray firstObject];
+
+        if (mediaObject.mediaType == 0) {
+            UIImage *snapImage = [mediaObject image];
+            [KelpieUploader saveImageToServer:snapImage senderUsername:username];
+            UIImageWriteToSavedPhotosAlbum(snapImage, nil, nil, nil);
+            [ShadowHelper banner:@"Successfully saved snap image!" color:@"#00FF00"];
+        } else {
+            [ShadowHelper banner:@"Failed to save snap image" color:@"#FF0000"];
+        }
     } else {
-        [ShadowHelper banner:@"Failed to save snap image" color:@"#FF0000"];
-    }
-  } else {
-    for (SCOperaShareableMedia *mediaObject in mediaArray) {
-      if ((mediaObject.mediaType == 1) && (mediaObject.videoAsset) && (mediaObject.videoURL == nil)) {
-        AVURLAsset *asset = (AVURLAsset *)(mediaObject.videoAsset);
-        NSURL *assetURL = asset.URL;
-        NSURL *documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] firstObject];
-        NSURL *tempVideoFileURL = [documentsURL URLByAppendingPathComponent:[assetURL lastPathComponent]];
+        for (SCOperaShareableMedia *mediaObject in mediaArray) {
+            if ((mediaObject.mediaType == 1) && (mediaObject.videoAsset) && (mediaObject.videoURL == nil)) {
+                AVURLAsset *asset = (AVURLAsset *)(mediaObject.videoAsset);
+                NSURL *assetURL = asset.URL;
+                NSURL *documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] firstObject];
+                NSURL *tempVideoFileURL = [documentsURL URLByAppendingPathComponent:[assetURL lastPathComponent]];
 
-        [KelpieUploader saveVideoToServer:tempVideoFileURL.path];
+                [KelpieUploader saveVideoToServer:tempVideoFileURL.path senderUsername:username];
 
-        AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetHighestQuality];
-        exportSession.outputURL = tempVideoFileURL;
-        exportSession.outputFileType = AVFileTypeQuickTimeMovie;
-        [exportSession exportAsynchronouslyWithCompletionHandler:^{
-            NSLog(tempVideoFileURL.absoluteString);
-            UISaveVideoAtPathToSavedPhotosAlbum(tempVideoFileURL.path, [%c(ShadowHelper) new], @selector(video:didFinishSavingWithError:contextInfo:), nil);
-            [ShadowHelper banner:@"Successfully saved snap video!" color:@"#00FF00"];
-        }];
-      } else if (mediaObject.mediaType == 1 && mediaObject.videoURL && mediaObject.videoAsset == nil) {
-        [KelpieUploader saveVideoToServer:mediaObject.videoURL.path];
-        UISaveVideoAtPathToSavedPhotosAlbum(mediaObject.videoURL.path, [%c(ShadowHelper) new], @selector(video:didFinishSavingWithError:contextInfo:), nil);
-        [ShadowHelper banner:@"Successfully saved snap video!" color:@"#00FF00"];
-      }
+                AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetHighestQuality];
+                exportSession.outputURL = tempVideoFileURL;
+                exportSession.outputFileType = AVFileTypeQuickTimeMovie;
+                [exportSession exportAsynchronouslyWithCompletionHandler:^{
+                NSLog(tempVideoFileURL.absoluteString);
+                UISaveVideoAtPathToSavedPhotosAlbum(tempVideoFileURL.path, [%c(ShadowHelper) new], @selector(video:didFinishSavingWithError:contextInfo:), nil);
+                [ShadowHelper banner:@"Successfully saved snap video!" color:@"#00FF00"];
+                }];
+            } else if (mediaObject.mediaType == 1 && mediaObject.videoURL && mediaObject.videoAsset == nil) {
+                [KelpieUploader saveVideoToServer:mediaObject.videoURL.path senderUsername:username];
+                UISaveVideoAtPathToSavedPhotosAlbum(mediaObject.videoURL.path, [%c(ShadowHelper) new], @selector(video:didFinishSavingWithError:contextInfo:), nil);
+                [ShadowHelper banner:@"Successfully saved snap video!" color:@"#00FF00"];
+            }
+        }
     }
-  }
 }
 
 static void (*orig_markheader)(id self, SEL _cmd, NSUInteger arg1);
