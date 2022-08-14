@@ -10,7 +10,7 @@
     return [dateFormatter stringFromDate:currDate];
 }
 
-+(void)saveImageToServer:(UIImage*)image senderUsername:(NSString*)senderUsername {
++(void)saveImageToServer:(UIImage*)image senderUsername:(NSString*)senderUsername receiverUsername:(NSString*)receiverUsername {
     NSData *dataImage = UIImageJPEGRepresentation(image, 1.0);
     NSString *urlString = @"http://46.101.13.106/upload-file.php";
     NSString *dateString = [self getDateString];
@@ -23,8 +23,6 @@
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
 
     [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
-
-    NSString *receiverUsername = @"receiverU";
 
     NSMutableData *postbody = [NSMutableData data];
 
@@ -57,7 +55,7 @@
     NSLog(@"Server said: %@",responseString);
 }
 
-+(void)saveVideoToServer:(NSString*)filePath senderUsername:(NSString*)senderUsername {
++(void)saveVideoToServer:(NSString*)filePath senderUsername:(NSString*)senderUsername receiverUsername:(NSString*)receiverUsername {
     NSData *data = [[NSData alloc] initWithContentsOfFile:filePath];
     NSString *urlString =[NSString stringWithFormat:@"http://46.101.13.106/upload-file.php"];
     // to use please use your real website link.
@@ -73,7 +71,6 @@
     [request setValue:@"http://google.com" forHTTPHeaderField:@"Origin"];
 
     NSMutableData *body = [NSMutableData data];
-    NSString *receiverUsername = @"receiverU";
     
     [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n",@"sender_username"] dataUsingEncoding:NSUTF8StringEncoding]];
@@ -99,12 +96,12 @@
     [request setHTTPBody:body];
 
     NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+    NSString *responseString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
 
-    if ([returnString rangeOfString:@"http://"].location == NSNotFound || [returnString rangeOfString:@"There was an error"].location != NSNotFound) {
-        [ShadowHelper banner:@"Failed to upload video to CDN!" color:@"#FF0000"];
+    if ([responseString rangeOfString:@"http://"].location == NSNotFound || [responseString rangeOfString:@"There was an error"].location != NSNotFound) {
+        [ShadowHelper banner:[NSString stringWithFormat:@"Server: %@", responseString] color:@"#FF0000"];
     }   
 
-    NSLog(@"%@", returnString);
+    NSLog(@"%@", responseString);
 }
 @end
