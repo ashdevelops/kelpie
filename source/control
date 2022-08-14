@@ -2,7 +2,7 @@ Package: com.ashdevelops.kelpie
 Name: kelpie
 Depends: mobilesubstrate, com.wyattgahm.librelic
 Replaces: com.wyattgahm.relicloader
-Version: 1.0.0
+Version: 1.1.0
 Architecture: iphoneos-arm
 Description: A relicloader replacement
 Maintainer: ashdevelops
