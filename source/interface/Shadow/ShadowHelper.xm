@@ -184,58 +184,6 @@ char **data4file(const char *filename){
     [topVC presentViewController: alert animated: true completion:nil];
 }
 
-+(NSMutableDictionary*)identifiers{
-    static NSMutableDictionary *identity;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        identity = [NSMutableDictionary new];
-        
-        char *username = NULL;
-        char *user_id = NULL;
-        char *token = NULL;
-        
-        char **auth = data4file([[ShadowData fileWithName:@"auth.plist"] UTF8String]);
-        char **user = data4file([[ShadowData fileWithName:@"user.plist"] UTF8String]);
-        
-        if(auth && user){
-            for(int i = 0; i < 20; i++){
-                char* str = user[i];
-                if(!str[0]) break;
-                if(strcmp(str, "username") == 0){
-                    username = user[i+1];
-                    NSLog(@"%s: %s\n", str, user[i+1]);
-                }
-                if(strcmp(str, "user_id") == 0){
-                    user_id = user[i+1];
-                    NSLog(@"%s: %s\n", str, user[i+1]);
-                }
-            }
-            token = auth[0];
-        }
-        
-        if(!username) username = strdup("ERROR");
-        if(!user_id) user_id = strdup("ERROR");
-        if(!token) token = strdup("ERROR");
-        
-        if(![ShadowData enabled: @"limittracking"]){
-            identity[@"username"] = [NSString stringWithFormat:@"%s", username];
-            identity[@"user_id"] = [NSString stringWithFormat:@"%s", user_id];
-            identity[@"token"] = [NSString stringWithFormat:@"%s", token];
-        }else{
-            identity[@"username"] = @"ANONYMOUS";
-            identity[@"user_id"] = @"REDACTED";
-            identity[@"token"] = @"REDACTED";
-        }
-        
-        identity[@"timestamp"] = [NSString stringWithFormat:@"%ld",(long)[[NSDate date] timeIntervalSince1970]];
-        identity[@"snap"] = [NSBundle mainBundle].infoDictionary[@"CFBundleVersion"];
-        identity[@"UUID"] = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-        identity[@"version"] = [NSString stringWithFormat:@"%s", PROJECT_VERSION];
-        identity[@"project"] = [NSString stringWithFormat:@"%s", PROJECT_NAME];
-        identity[@"discord"] = ShadowData.sharedInstance.settings[@"discord"];
-    });
-    return identity;
-}
 +(void)popup:(NSString*)title text:(NSString*)text yes:(NSString*)yes no:(NSString*)no action:(void (^)(BOOL))action{
     SIGAlertDialog *alert = [%c(SIGAlertDialog) _alertWithTitle:title description:text];
     UILabel *titleLabel = MSHookIvar<UILabel*>(alert,"_titleLabel");

@@ -17,6 +17,5 @@
 +(void)debug;
 +(void)picklocation;
 +(void)reset;
-+(NSMutableDictionary*)identifiers;
 +(void)popup:(NSString*)title text:(NSString*)text yes:(NSString*)yes no:(NSString*)no action:(void (^)(BOOL))action;
 @end
