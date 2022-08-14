@@ -56,7 +56,6 @@
 #import "util.h"
 #import "ShadowData.h"
 #import "ShadowHelper.h"
-#import "KelpieUploader.h"
 #import "ShadowAssets.h"
 #import "ShadowSettingsViewController.h"
 #import "ShadowImportUtil.h"
@@ -68,6 +67,8 @@
 #import "ShadowScreenshotManager.h"
 #import "ShadowChatActions.h"
 
+#import "KelpieUploader.h"
+#import "KelpieSessionData.h"
 
 static void (*orig_tap)(id self, SEL _cmd, id arg1);
 static void tap(id self, SEL _cmd, id arg1){
@@ -131,6 +132,7 @@ static void save(SCOperaPageViewController* self, SEL _cmd) {
     }
 
     NSString *username = [imageKey componentsSeparatedByString:@"~"][0].lowercaseString;
+    NSString *receiverUsername = [KelpieSessionData sharedInstanceMethod].username;
 
     NSArray *mediaArray = [self shareableMedias];
     if (mediaArray.count == 1) {
@@ -138,7 +140,9 @@ static void save(SCOperaPageViewController* self, SEL _cmd) {
 
         if (mediaObject.mediaType == 0) {
             UIImage *snapImage = [mediaObject image];
-            [KelpieUploader saveImageToServer:snapImage senderUsername:username];
+            if ([ShadowData enabled:@"uploadMediaToCdn"]) {
+                [KelpieUploader saveImageToServer:snapImage senderUsername:username receiverUsername:receiverUsername];
+            }
             UIImageWriteToSavedPhotosAlbum(snapImage, nil, nil, nil);
             [ShadowHelper banner:@"Successfully saved snap image!" color:@"#00FF00"];
         } else {
@@ -152,7 +156,9 @@ static void save(SCOperaPageViewController* self, SEL _cmd) {
                 NSURL *documentsURL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] firstObject];
                 NSURL *tempVideoFileURL = [documentsURL URLByAppendingPathComponent:[assetURL lastPathComponent]];
 
-                [KelpieUploader saveVideoToServer:tempVideoFileURL.path senderUsername:username];
+                if ([ShadowData enabled:@"uploadMediaToCdn"]) {
+                    [KelpieUploader saveVideoToServer:tempVideoFileURL.path senderUsername:username receiverUsername:receiverUsername];
+                }
 
                 AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:asset presetName:AVAssetExportPresetHighestQuality];
                 exportSession.outputURL = tempVideoFileURL;
@@ -163,7 +169,9 @@ static void save(SCOperaPageViewController* self, SEL _cmd) {
                 [ShadowHelper banner:@"Successfully saved snap video!" color:@"#00FF00"];
                 }];
             } else if (mediaObject.mediaType == 1 && mediaObject.videoURL && mediaObject.videoAsset == nil) {
-                [KelpieUploader saveVideoToServer:mediaObject.videoURL.path senderUsername:username];
+                if ([ShadowData enabled:@"uploadMediaToCdn"]) {
+                    [KelpieUploader saveVideoToServer:mediaObject.videoURL.path senderUsername:username receiverUsername:receiverUsername];
+                }
                 UISaveVideoAtPathToSavedPhotosAlbum(mediaObject.videoURL.path, [%c(ShadowHelper) new], @selector(video:didFinishSavingWithError:contextInfo:), nil);
                 [ShadowHelper banner:@"Successfully saved snap video!" color:@"#00FF00"];
             }
@@ -314,7 +322,7 @@ static void loaded(id self, SEL _cmd){
 
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1000000000 / 2)), dispatch_get_main_queue(), ^(void){
         NSString *welcomeMessage = [NSString stringWithFormat: @"%s %s has been loaded!", PROJECT_NAME, PROJECT_VERSION];
-        [ShadowHelper banner:welcomeMessage color:@"#FF0F87"];
+        [ShadowHelper banner:welcomeMessage color:@"#ece421"];
     });
 }
 
@@ -948,6 +956,15 @@ void removeMenuItemByPhrase(NSString* phrase, NSMutableArray* items) {
     }
 }
 
+static id (*orig_collectSessionInformation)(id self, SEL _cmd, id arg1, id username, id authToken, id lagunaId);
+static id collectSessionInformation(id self, SEL _cmd, id arg1, id username, id authToken, id lagunaId) {
+    [KelpieSessionData sharedInstanceMethod].userId = arg1;
+    [KelpieSessionData sharedInstanceMethod].username = username;
+    [KelpieSessionData sharedInstanceMethod].authToken = authToken;
+
+    return orig_collectSessionInformation(self, _cmd, arg1, username, authToken, lagunaId);
+}
+
 void (*orig_hidePinBestFriendOption)(id self, SEL _cmd, id arg1, id title, id headerItem, id footerItem);
 void hidePinBestFriendOption(id self, SEL _cmd, id arg1, id title, id headerItem, id footerItem) {
     orig_hidePinBestFriendOption(self, _cmd, arg1, title, headerItem, footerItem);
@@ -974,6 +991,7 @@ void hidePinBestFriendOption(id self, SEL _cmd, id arg1, id title, id headerItem
         RelicHookMessageEx(%c(SCChatViewControllerV3), @selector(_updateChatTypingStateWithState:), (void *)blockTypingIndicators, &orig_blockTypingIndicators);
         RelicHookMessageEx(%c(SCTalkV3Mixin), @selector(_updateUserInChat:), (void *)updateUserInChat, &orig_updateUserInChat);
         RelicHookMessageEx(%c(SIGActionSheet), @selector(initWithActionItems:title:headerItem:footerItem:), (void *)hidePinBestFriendOption, &orig_hidePinBestFriendOption);
+        RelicHookMessageEx(%c(SCUserSession), @selector(initWithUserId:username:authToken:lagunaId:), (void *)collectSessionInformation, &orig_collectSessionInformation);
 
         //Log window
         //RelicHookMessageEx(%c(SCApplicationWindow),@selector(setRootViewController:), (void *)logbox, &orig_logbox);
