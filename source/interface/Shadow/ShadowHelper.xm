@@ -48,7 +48,7 @@ char **data4file(const char *filename){
     [%c(SCStatusBarOverlayLabelWindow) showMessageWithText:text backgroundColor:bannerColor];
 }
 +(void)banner:(NSString*)text color:(NSString *)color{
-    [self banner:text color:color alpha:.92];
+    [self banner:text color:color alpha:.97];
 }
 +(void)debug{
     [[XLLogerManager manager] showOnWindow];
