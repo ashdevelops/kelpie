@@ -20,7 +20,6 @@
     ["shadow experiments", "sctesting", "Enable Experiments", "Enable all snapchat experiments (like UI stuff)", "switch", "false"],
     ["shadow experiments", "noads", "Disable Ads", "Block all advertisements.", "switch", "true"],
     ["shadow experiments", "eastereggs", "Enable Easter Eggs", "Enable some small and potentially buggy secret changes.", "switch", "true"],
-    ["shadow experiments", "theme", "Change Shadow Theming", "Pick a theme for shadow's buttons + settings",  "button", "SELECT"],
     ["shadow experiments", "keepchat", "Ignore deleted chats", "Ignore some deleted chats (only works when in chat)",  "switch", "true"],
     ["shadow experiments", "saveaudio", "Save Audio Notes", "Automatically save audio notes to the documents dir",  "switch", "true"],
     
