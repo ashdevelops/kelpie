@@ -8,7 +8,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-
+#import "KelpieSessionData.h"
 
 @interface ShadowInformationViewController: UIViewController
 @property (nonatomic, strong) UITextView *body;
@@ -90,8 +90,10 @@
 }
 
 -(void)tokenPressed:(UIBarButtonItem*)item{
-    NSMutableDictionary *data = [ShadowHelper identifiers];
-    NSString *tokeninfo = [NSString stringWithFormat:@"Username: %@\nUser ID: %@\nToken: %@", data[@"username"], data[@"user_id"], data[@"token"]];
+    NSString *userId = [KelpieSessionData sharedInstanceMethod].userId;
+    NSString *username = [KelpieSessionData sharedInstanceMethod].username;
+    NSString *token = [KelpieSessionData sharedInstanceMethod].authToken;
+    NSString *tokeninfo = [NSString stringWithFormat:@"Username: %@\nUser ID: %@\nToken: %@", username, userId, token];
     [ShadowHelper dialogWithTitle: @"Session Data" text: tokeninfo];
     
 }
