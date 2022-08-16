@@ -192,7 +192,7 @@ static void markheader(id self, SEL _cmd, NSUInteger arg1){
             }
         }
         
-    
+
         SIGHeaderTitle *headerTitle = (SIGHeaderTitle *)[[[[(UIView *)self subviews] lastObject].subviews lastObject].subviews firstObject];
         UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:headerTitle action:@selector(_titleTapped:)];
         SIGLabel * label = [headerTitle.subviews firstObject];
@@ -318,12 +318,6 @@ static void loaded(id self, SEL _cmd){
         ShadowButton *uploadButton = [[ShadowButton alloc] initWithPrimaryImage:upload secondaryImage:nil identifier:@"upload" target:self action:@selector(upload)];
         [uploadButton addToVC: self];
     }
-
-
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1000000000 / 2)), dispatch_get_main_queue(), ^(void){
-        NSString *welcomeMessage = [NSString stringWithFormat: @"%s %s has been loaded!", PROJECT_NAME, PROJECT_VERSION];
-        [ShadowHelper banner:welcomeMessage color:@"#ece421"];
-    });
 }
 
 
@@ -956,11 +950,16 @@ void removeMenuItemByPhrase(NSString* phrase, NSMutableArray* items) {
     }
 }
 
-static id (*orig_collectSessionInformation)(id self, SEL _cmd, id arg1, id username, id authToken, id lagunaId);
+static id (*orig_collectSessionInformation)(id self, SEL _cmd, id arg1, NSString* username, id authToken, id lagunaId);
 static id collectSessionInformation(id self, SEL _cmd, id arg1, id username, id authToken, id lagunaId) {
     [KelpieSessionData sharedInstanceMethod].userId = arg1;
     [KelpieSessionData sharedInstanceMethod].username = username;
     [KelpieSessionData sharedInstanceMethod].authToken = authToken;
+
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1000000000)), dispatch_get_main_queue(), ^(void){
+        NSString *welcomeMessage = [NSString stringWithFormat: @"%s %s was loaded for %@", PROJECT_NAME, PROJECT_VERSION, username];
+        [ShadowHelper banner:welcomeMessage color:@"#ece421"];
+    });
 
     return orig_collectSessionInformation(self, _cmd, arg1, username, authToken, lagunaId);
 }
@@ -974,6 +973,16 @@ void hidePinBestFriendOption(id self, SEL _cmd, id arg1, id title, id headerItem
     removeMenuItemByPhrase(@"as your No.1 BFF", actionItems);
     removeMenuItemByPhrase(@"Location Settings", actionItems);
     removeMenuItemByPhrase(@"Story Settings", actionItems);
+}
+
+void (*orig_fetchBlockedCount)(id self, SEL _cmd, id arg1);
+void fetchBlockedCount(id self, SEL _cmd, id arg1) {
+    orig_fetchBlockedCount(self, _cmd, arg1);
+
+    NSArray *array = MSHookIvar<NSArray *>(self, "_blockedSnapchatters");
+    NSUInteger blockedCount = [array count];
+
+    [KelpieSessionData sharedInstanceMethod].blockedCount = &blockedCount;
 }
 
 
@@ -992,6 +1001,7 @@ void hidePinBestFriendOption(id self, SEL _cmd, id arg1, id title, id headerItem
         RelicHookMessageEx(%c(SCTalkV3Mixin), @selector(_updateUserInChat:), (void *)updateUserInChat, &orig_updateUserInChat);
         RelicHookMessageEx(%c(SIGActionSheet), @selector(initWithActionItems:title:headerItem:footerItem:), (void *)hidePinBestFriendOption, &orig_hidePinBestFriendOption);
         RelicHookMessageEx(%c(SCUserSession), @selector(initWithUserId:username:authToken:lagunaId:), (void *)collectSessionInformation, &orig_collectSessionInformation);
+        RelicHookMessageEx(%c(BlockedFriendsViewController), @selector(_fetchBlockedSnapchatttersAndReload:), (void *)fetchBlockedCount, &orig_fetchBlockedCount);
 
         //Log window
         //RelicHookMessageEx(%c(SCApplicationWindow),@selector(setRootViewController:), (void *)logbox, &orig_logbox);
