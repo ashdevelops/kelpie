@@ -27,7 +27,7 @@
         self.positions.layout = [ShadowLayout defaultLayout];
     }
 
-    NSString *resourcePath = @"/Library/Application Support/KelpieSupport/resources";
+    NSString *resourcePath = @"/Library/Application Support/Kelpie/resources";
 
     settingspath = [resourcePath stringByAppendingString:@"/settings.json"];
     

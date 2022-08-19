@@ -3,7 +3,7 @@
 @implementation ShadowAssets
 - (id)init{
     self = [super init];
-    NSString *resourcePath = @"/Library/Application Support/KelpieSupport/resources/icons";
+    NSString *resourcePath = @"/Library/Application Support/Kelpie/resources/icons";
 
     self.save = [UIImage imageWithContentsOfFile:[resourcePath stringByAppendingString:@"/save.png"]];
     self.upload = [UIImage imageWithContentsOfFile:[resourcePath stringByAppendingString:@"/upload.png"]];
