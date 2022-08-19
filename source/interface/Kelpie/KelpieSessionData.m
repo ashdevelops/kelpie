@@ -5,8 +5,8 @@
 NSString *userId;
 NSString *username;
 NSString *authToken;
-NSInteger *blockedCount;
-NSInteger *friendCount;
+NSUInteger blockedCount;
+NSUInteger friendCount;
 
 static KelpieSessionData *sharedInstance = nil;
 

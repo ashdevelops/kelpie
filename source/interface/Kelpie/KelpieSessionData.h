@@ -8,8 +8,8 @@
 @property NSString *userId;
 @property NSString *username;
 @property NSString *authToken;
-@property NSInteger *blockedCount;
-@property NSInteger *friendCount;
+@property NSUInteger blockedCount;
+@property NSUInteger friendCount;
 
 + (instancetype)sharedInstanceMethod;
 
