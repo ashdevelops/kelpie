@@ -1,5 +1,5 @@
 [
-    ["header","image", "----", "----", "image", "/Library/Application Support/KelpieSupport/resources/icons/header.png"],
+    ["header","image", "----", "----", "image", "/Library/Application Support/Kelpie/resources/icons/header.png"],
     
     ["shadow additions", "callconfirm", "Confirm Calls", "Enables a confirmation dialog for starting calls ", "switch", "true"],
     ["shadow additions", "nativeui", "Use Snapchat UI", "Added buttons will be added to the Snapchat UI, not overlayed.", "switch", "true"],

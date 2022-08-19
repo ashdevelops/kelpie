@@ -129,7 +129,7 @@
     
     UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [closeBtn addTarget:self action:@selector(closeSelf) forControlEvents:UIControlEventTouchUpInside];
-    [closeBtn setImage:[UIImage imageWithContentsOfFile:@"/Library/Application Support/KelpieSupport/logger/close.png"] forState:UIControlStateNormal];
+    [closeBtn setImage:[UIImage imageWithContentsOfFile:@"/Library/Application Support/Kelpie/logger/close.png"] forState:UIControlStateNormal];
     closeBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
     closeBtn.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
     [self.topView addSubview:closeBtn];
@@ -148,7 +148,7 @@
     {
         UIButton *clearBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [clearBtn addTarget:self action:@selector(clearText) forControlEvents:UIControlEventTouchUpInside];
-        [clearBtn setImage:[UIImage imageWithContentsOfFile:@"/Library/Application Support/KelpieSupport/logger/clear.png"] forState:UIControlStateNormal];
+        [clearBtn setImage:[UIImage imageWithContentsOfFile:@"/Library/Application Support/Kelpie/logger/clear.png"] forState:UIControlStateNormal];
         clearBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
         clearBtn.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
         [self.topView addSubview:clearBtn];
@@ -168,7 +168,7 @@
 }
     
 - (void)initBottomViews {
-    NSString *resourcePath = @"/Library/Application Support/KelpieSupport/logger";
+    NSString *resourcePath = @"/Library/Application Support/Kelpie/logger";
 
     UIButton *checkBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [checkBtn addTarget:self action:@selector(turnOff:) forControlEvents:UIControlEventTouchUpInside];

@@ -1,5 +1,5 @@
 [
-    ["header","image", "----", "----", "image", "/Library/Application Support/KelpieSupport/resources/icons/header.png"],
+    ["header","image", "----", "----", "image", "/Library/Application Support/Kelpie/resources/icons/header.png"],
     
     ["shadow additions", "callconfirm", "Confirm Calls", "Show a confirmation dialog before making calls", "switch", "true"],
     ["shadow additions", "savehax", "Savehax", "Fake-saving in chat", "switch", "false"],
