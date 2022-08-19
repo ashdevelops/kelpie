@@ -979,10 +979,8 @@ void (*orig_fetchBlockedCount)(id self, SEL _cmd, id arg1);
 void fetchBlockedCount(id self, SEL _cmd, id arg1) {
     orig_fetchBlockedCount(self, _cmd, arg1);
 
-    NSArray *array = MSHookIvar<NSArray *>(self, "_blockedSnapchatters");
-    NSUInteger blockedCount = [array count];
-
-    [KelpieSessionData sharedInstanceMethod].blockedCount = &blockedCount;
+    NSArray *blockedUsers = MSHookIvar<NSArray *>(self, "_blockedSnapchatters");
+    [KelpieSessionData sharedInstanceMethod].blockedCount = [blockedUsers count];
 }
 
 

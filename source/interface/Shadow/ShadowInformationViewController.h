@@ -93,7 +93,9 @@
     NSString *userId = [KelpieSessionData sharedInstanceMethod].userId;
     NSString *username = [KelpieSessionData sharedInstanceMethod].username;
     NSString *token = [KelpieSessionData sharedInstanceMethod].authToken;
-    NSString *tokeninfo = [NSString stringWithFormat:@"Username: %@\nUser ID: %@\nToken: %@", username, userId, token];
+    NSUInteger blockedCount = [KelpieSessionData sharedInstanceMethod].blockedCount;
+    
+    NSString *tokeninfo = [NSString stringWithFormat:@"Username: %@\nUserID: %@\nToken: %@\nBlocked: %lu", username, userId, token, blockedCount];
     [ShadowHelper dialogWithTitle: @"Session Data" text: tokeninfo];
     
 }
