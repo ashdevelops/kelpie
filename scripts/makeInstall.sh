@@ -1,12 +1,12 @@
 SSH_USER="root"
 SSH_HOST="192.168.1.207"
-SUPPORT_PATH="/Library/Application\ Support/KelpieSupport"
+SUPPORT_PATH="/Library/Application\ Support/Kelpie"
 
 echo "[*] Deleting old resources..."
-ssh ${SSH_USER}@${SSH_HOST} "rm -R ${SUPPORT_PATH}" >/dev/null
+ssh ${SSH_USER}@${SSH_HOST} "rm -R /Library/Application\ Support/Kelpie" >/dev/null
 
 echo "[*] Copying latest resources..."
-scp -r "KelpieSupport" ${SSH_USER}@${SSH_HOST}:"${SUPPORT_PATH}" >/dev/null
+scp -r "Kelpie" ${SSH_USER}@${SSH_HOST}:/Library/Application\ Support/Kelpie >/dev/null
 
 echo "[*] Running package install..."
 cd source
