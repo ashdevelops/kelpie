@@ -12,7 +12,7 @@
 #define THEME @"theme"
 #define LAYOUT @"layout"
 #define FIRST @"first"
-#define PREFFILE @"shadowxrelic.plist"
+#define PREFFILE @"kelpie.plist"
 
 @interface ShadowData:NSObject <NSCoding>
 @property NSArray<ShadowSetting *> *prefs;

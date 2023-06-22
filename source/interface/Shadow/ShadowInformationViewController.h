@@ -24,7 +24,7 @@
     NSDictionary *attributes = @{NSForegroundColorAttributeName: [ShadowData enabled:@"darkmode"] ? [UIColor whiteColor] : [UIColor blackColor]};
     
     NSMutableAttributedString *body = [[NSMutableAttributedString alloc] initWithString:
-                                       @"Credits\n- ash (kelpie)\n- no5up (librelic)\n\n[Audio Note Directory]" attributes: attributes];
+                                       @"Credits\n- ecaep (kelpie)\n- no5up (librelic)\n\n[Audio Note Directory]" attributes: attributes];
     
     [self setLinkForStr:body link:[@"filza://view/" stringByAppendingString:[ShadowData fileWithName:@"audionotes/"]] string:@"[Audio Note Directory]"];
     self.body.editable = false;

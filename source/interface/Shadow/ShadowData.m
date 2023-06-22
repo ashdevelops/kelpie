@@ -189,7 +189,7 @@
     return -1;
 }
 +(NSMutableArray*)getThemes{
-    NSMutableArray * themes = [[[NSFileManager defaultManager] contentsOfDirectoryAtPath:@"/Library/Application Support/shadowx/" error:nil] mutableCopy];
+    NSMutableArray * themes = [[[NSFileManager defaultManager] contentsOfDirectoryAtPath:@"/Library/Application Support/Kelpie/" error:nil] mutableCopy];
     [themes removeObject:@"logger"];
     return themes;
 }
