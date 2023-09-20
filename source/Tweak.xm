@@ -347,8 +347,8 @@ static void raddhandler(id self, SEL _cmd){
         NSString *appUrl = [NSString stringWithFormat:@"%@/%@", @"snapchat://add", username];
 
         NSString *bannerText = [NSString stringWithFormat:@"%@ - %@", name, age];
-        [ShadowHelper banner:apiData color:@"#00aaff"];
-        
+        [ShadowHelper banner:bannerText color:@"#00aaff"];
+
         NSLog(appUrl);
         
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appUrl]];
