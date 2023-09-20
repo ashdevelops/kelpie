@@ -321,7 +321,7 @@ static void loaded(id self, SEL _cmd){
 
 static void raddhandler(id self, SEL _cmd){
     [ShadowHelper banner:@"we did it :P" color:@"#00FF00"];
-    UIApplication.shared.openURL(@"https://snapchat.com/add/ash123")
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://snapchat.com/add/ash123"]];
 }
 
 static void uploadhandler(id self, SEL _cmd){
