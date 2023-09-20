@@ -321,12 +321,14 @@ static void loaded(id self, SEL _cmd){
 }
 
 static void raddhandler(id self2, SEL _cmd){
-    *timer = [NSTimer scheduledTimerWithTimeInterval:6
-                                                      target:HttpHelper 
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:6
+                                                      target:self 
                                                     selector:@selector(add) 
                                                     userInfo:nil 
                                                      repeats:YES];
 }
+
+static void add() {}
 
 static void uploadhandler(id self, SEL _cmd){
     SCMainCameraViewController *cam = [((UIViewController*)self).childViewControllers firstObject];
