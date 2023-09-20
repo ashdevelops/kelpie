@@ -4,5 +4,5 @@
 #import <objc/runtime.h>
 
 @interface HttpHelper: NSObject
-+(NSString)getDataFromUrl:(NSString*)url;
++(NSString *)getDataFromUrl:(NSString*)url;
 @end
