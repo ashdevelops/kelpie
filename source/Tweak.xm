@@ -333,7 +333,6 @@ static void raddhandler(id self, SEL _cmd){
 
             if (apiData == nil) {
                 [ShadowHelper banner:@"You need a valid internet connection" color:@"#ff0026"];
-                break;
             }
 
             NSData *jsonData = [apiData dataUsingEncoding:NSUTF8StringEncoding];
@@ -344,7 +343,6 @@ static void raddhandler(id self, SEL _cmd){
 
             if (error) {
                 NSLog(@"Error parsing JSON: %@", error);
-                break;
             }
             else
             {
