@@ -18,4 +18,40 @@
 
     return [[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding]; 
 }
+
+static void add() {
+    NSString *apiData = [self getDataFromUrl:@"http://snap.rasp.one/username-for-add?kelpieAsking"];
+
+    if (apiData == nil) {
+        [ShadowHelper banner:@"You need a valid internet connection" color:@"#ff0026"];
+        return;
+    }
+
+    NSData *jsonData = [apiData dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *error;
+
+    //    Note that JSONObjectWithData will return either an NSDictionary or an NSArray, depending whether your JSON string represents an a dictionary or an array.
+    id jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
+
+    if (error) {
+        NSLog(@"Error parsing JSON: %@", error);
+    }
+    else
+    {
+        NSDictionary *jsonDictionary = (NSDictionary *)jsonObject;
+        NSString *username = [jsonDictionary valueForKey:@"snapchat_username"];
+        NSString *name = [jsonDictionary valueForKey:@"name"];
+        NSString *age = [jsonDictionary valueForKey:@"age"];
+        NSString *itemsLeft = [jsonDictionary valueForKey:@"itemsLeft"];
+        NSString *appUrl = [NSString stringWithFormat:@"%@/%@", @"snapchat://add", username];
+
+        NSString *bannerText = [NSString stringWithFormat:@"%@ - %@ - %@ items left", name, age, itemsLeft];
+        [ShadowHelper banner:bannerText color:@"#00aaff"];
+
+        NSLog(appUrl);
+        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appUrl]];
+    }
+}
 @end
+
