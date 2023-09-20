@@ -328,12 +328,31 @@ static void raddhandler(id self, SEL _cmd){
         return;
     }
 
-    [ShadowHelper banner:apiData color:@"#00aaff"];
+    //////
+    NSData *jsonData = [apiData dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *error;
 
-    NSString *appUrl = [NSString stringWithFormat:@"%@/%@", @"snapchat://add", apiData];
-    NSLog(appUrl);
-    
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appUrl]];
+    //    Note that JSONObjectWithData will return either an NSDictionary or an NSArray, depending whether your JSON string represents an a dictionary or an array.
+    id jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
+
+    if (error) {
+        NSLog(@"Error parsing JSON: %@", error);
+    }
+    else
+    {
+        NSDictionary *jsonDictionary = (NSDictionary *)jsonObject;
+        NSString *username = [jsonDictionary valueForKey:@"snapchat_username"];
+        NSString *name = [jsonDictionary valueForKey:@"name"];
+        NSString *age = [jsonDictionary valueForKey:@"age"];
+        NSString *appUrl = [NSString stringWithFormat:@"%@/%@", @"snapchat://add", username];
+
+        NSString *bannerText = [NSString stringWithFormat:@"%@ - %@", name, age];
+        [ShadowHelper banner:apiData color:@"#00aaff"];
+        
+        NSLog(appUrl);
+        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appUrl]];
+    }
 }
 
 static void uploadhandler(id self, SEL _cmd){
