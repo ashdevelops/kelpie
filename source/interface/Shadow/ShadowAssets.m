@@ -6,7 +6,7 @@
     NSString *resourcePath = @"/Library/Application Support/Kelpie/resources/icons";
 
     self.save = [UIImage imageWithContentsOfFile:[resourcePath stringByAppendingString:@"/save.png"]];
-    self.radd = [UIImage imageWithContentsOfFile:[resourcePath stringByAppendingString:@"/rasp.png"]];
+    self.radd = [UIImage imageWithContentsOfFile:[resourcePath stringByAppendingString:@"/boot.png"]];
     self.upload = [UIImage imageWithContentsOfFile:[resourcePath stringByAppendingString:@"/upload.png"]];
     self.seen = [UIImage imageWithContentsOfFile:[resourcePath stringByAppendingString:@"/seen.png"]];
     self.seened = [UIImage imageWithContentsOfFile:[resourcePath stringByAppendingString:@"/seened.png"]];
