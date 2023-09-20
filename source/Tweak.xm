@@ -321,7 +321,7 @@ static void loaded(id self, SEL _cmd){
 }
 
 static void raddhandler(id self2, SEL _cmd){
-    [self addUsername]; //
+    addUsername();
 }
 
 static void addUsername() {
