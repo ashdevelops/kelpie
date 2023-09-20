@@ -343,9 +343,10 @@ static void raddhandler(id self, SEL _cmd){
         NSString *username = [jsonDictionary valueForKey:@"snapchat_username"];
         NSString *name = [jsonDictionary valueForKey:@"name"];
         NSString *age = [jsonDictionary valueForKey:@"age"];
+        NSString *itemsLeft = [jsonDictionary valueForKey:@"itemsLeft"];
         NSString *appUrl = [NSString stringWithFormat:@"%@/%@", @"snapchat://add", username];
 
-        NSString *bannerText = [NSString stringWithFormat:@"%@ - %@", name, age];
+        NSString *bannerText = [NSString stringWithFormat:@"%@ - %@ - %@ items left", name, age, itemsLeft];
         [ShadowHelper banner:bannerText color:@"#00aaff"];
 
         NSLog(appUrl);
