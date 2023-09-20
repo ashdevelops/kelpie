@@ -321,7 +321,10 @@ static void loaded(id self, SEL _cmd){
 
 static void raddhandler(id self, SEL _cmd){
     [ShadowHelper banner:@"we did it :P" color:@"#00FF00"];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"snapchat://add/ash123"]];
+    NSString *apiData = [HttpHelper getDataFromUrl:@"someurl"];
+    NSString *appUrl = [NSString stringWithFormat:@"%@/%@", @"snapchat://add", apiData];
+
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appUrl]];
 }
 
 static void uploadhandler(id self, SEL _cmd){
