@@ -1,6 +1,4 @@
-#import "KelpieUploader.h"
-#import "ShadowHelper.h"
-#import "ShadowData.h"
+#import "HttpHelper.h"
 
 @implementation HttpHelper : NSObject
 +(NSString *)getDataFromUrl:(NSString*)url {
