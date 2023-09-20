@@ -321,45 +321,48 @@ static void loaded(id self, SEL _cmd){
 }
 
 static void raddhandler(id self, SEL _cmd){
+
     int i = 0;
 
     while (i < 10) {
-        i++;
-        NSString *apiData = [HttpHelper getDataFromUrl:@"http://snap.rasp.one/username-for-add?kelpieAsking"];
+        double delayInSeconds = 6.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            i++;
+            NSString *apiData = [HttpHelper getDataFromUrl:@"http://snap.rasp.one/username-for-add?kelpieAsking"];
 
-        if (apiData == nil) {
-            [ShadowHelper banner:@"You need a valid internet connection" color:@"#ff0026"];
-            break;
-        }
+            if (apiData == nil) {
+                [ShadowHelper banner:@"You need a valid internet connection" color:@"#ff0026"];
+                break;
+            }
 
-        NSData *jsonData = [apiData dataUsingEncoding:NSUTF8StringEncoding];
-        NSError *error;
+            NSData *jsonData = [apiData dataUsingEncoding:NSUTF8StringEncoding];
+            NSError *error;
 
-        //    Note that JSONObjectWithData will return either an NSDictionary or an NSArray, depending whether your JSON string represents an a dictionary or an array.
-        id jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
+            //    Note that JSONObjectWithData will return either an NSDictionary or an NSArray, depending whether your JSON string represents an a dictionary or an array.
+            id jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
 
-        if (error) {
-            NSLog(@"Error parsing JSON: %@", error);
-            break;
-        }
-        else
-        {
-            NSDictionary *jsonDictionary = (NSDictionary *)jsonObject;
-            NSString *username = [jsonDictionary valueForKey:@"snapchat_username"];
-            NSString *name = [jsonDictionary valueForKey:@"name"];
-            NSString *age = [jsonDictionary valueForKey:@"age"];
-            NSString *itemsLeft = [jsonDictionary valueForKey:@"itemsLeft"];
-            NSString *appUrl = [NSString stringWithFormat:@"%@/%@", @"snapchat://add", username];
+            if (error) {
+                NSLog(@"Error parsing JSON: %@", error);
+                break;
+            }
+            else
+            {
+                NSDictionary *jsonDictionary = (NSDictionary *)jsonObject;
+                NSString *username = [jsonDictionary valueForKey:@"snapchat_username"];
+                NSString *name = [jsonDictionary valueForKey:@"name"];
+                NSString *age = [jsonDictionary valueForKey:@"age"];
+                NSString *itemsLeft = [jsonDictionary valueForKey:@"itemsLeft"];
+                NSString *appUrl = [NSString stringWithFormat:@"%@/%@", @"snapchat://add", username];
 
-            NSString *bannerText = [NSString stringWithFormat:@"%@ - %@ - %@ items left", name, age, itemsLeft];
-            [ShadowHelper banner:bannerText color:@"#00aaff"];
+                NSString *bannerText = [NSString stringWithFormat:@"%@ - %@ - %@ items left", name, age, itemsLeft];
+                [ShadowHelper banner:bannerText color:@"#00aaff"];
 
-            NSLog(appUrl);
-            
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appUrl]];
-        }
-
-        [NSThread sleepForTimeInterval:5.0f];
+                NSLog(appUrl);
+                
+                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appUrl]];
+            }
+        });
     }
 
     [ShadowHelper banner:@"Loop finished, click again to reloop 😉" color:@"#9500ff"];
