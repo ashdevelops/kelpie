@@ -328,7 +328,6 @@ static void raddhandler(id self, SEL _cmd){
         return;
     }
 
-    //////
     NSData *jsonData = [apiData dataUsingEncoding:NSUTF8StringEncoding];
     NSError *error;
 
