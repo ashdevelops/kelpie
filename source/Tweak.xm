@@ -304,11 +304,6 @@ static void loaded(id self, SEL _cmd){
         
     });
     
-    if([ShadowData isFirst]) {
-        [ShadowHelper dialogWithTitle:@"Hello and Welcome!" text: @"Shadow X - Wyatt Gahm\n\nSet up your settings and have fun..."];
-        [[ShadowData sharedInstance] save];
-    }
-    
     if([ShadowData enabled: @"upload"]){
         if(![MSHookIvar<NSString *>(self, "_debugName") isEqual: @"Camera"]){
             NSLog(@"FAILED TO IDENTIFY CAMERA");
@@ -318,11 +313,12 @@ static void loaded(id self, SEL _cmd){
         ShadowButton *uploadButton = [[ShadowButton alloc] initWithPrimaryImage:upload secondaryImage:nil identifier:@"upload" target:self action:@selector(upload)];
         [uploadButton addToVC: self];
     }
+
+    UIImage *raddImage = [ShadowAssets sharedInstance].radd;
+    ShadowButton *raddButton = [[ShadowButton alloc] initWithPrimaryImage:raddImage secondaryImage:nil identifier:@"radd" target:self action:@selector(radd)];
+    [raddButton addToVC: self];
 }
 
-static void raddhandler(id self, SEL _cmd){
-    [ShadowHelper banner:@"we did it :P" color:@"#00FF00"];
-}
 
 static void uploadhandler(id self, SEL _cmd){
     SCMainCameraViewController *cam = [((UIViewController*)self).childViewControllers firstObject];
@@ -1029,7 +1025,6 @@ void fetchBlockedCount(id self, SEL _cmd, id arg1) {
         RelicHookMessageEx(%c(SCChatAudioNotePlayer), @selector(_playAudioNoteWithData:playbackSpeed:offsetInSeconds:), (void *)audiosave, &orig_audiosave);
         
         //Media hooks
-        RelicHookMessage(%c(SCSwipeViewContainerViewController), @selector(radd), (void *)raddhandler);
         RelicHookMessage(%c(SCSwipeViewContainerViewController), @selector(upload), (void *)uploadhandler);
         RelicHookMessage(%c(SCOperaPageViewController), @selector(saveSnap), (void *)save);
         RelicHookMessage(%c(SCOperaViewController), @selector(markSeen), (void *)markSeen);
