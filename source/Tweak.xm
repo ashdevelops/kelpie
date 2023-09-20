@@ -54,6 +54,7 @@
 #import "SCCameraVerticalToolbar.h"
 
 #import "util.h"
+#import "HttpHelper.h"
 #import "ShadowData.h"
 #import "ShadowHelper.h"
 #import "ShadowAssets.h"
