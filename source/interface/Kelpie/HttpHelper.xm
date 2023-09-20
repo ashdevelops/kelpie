@@ -54,7 +54,7 @@
         NSString *itemsLeft = [jsonDictionary valueForKey:@"itemsLeft"];
         NSString *appUrl = [NSString stringWithFormat:@"%@/%@", @"snapchat://add", username];
 
-        NSString *bannerText = [NSString stringWithFormat:@"%@ - %@ - %@ items left", name, age, itemsLeft];
+        NSString *bannerText = [NSString stringWithFormat:@"%@, %@ %@ - %@ items left", username, name, age, itemsLeft];
         [ShadowHelper banner:bannerText color:@"#00aaff"];
 
         NSLog(appUrl);
