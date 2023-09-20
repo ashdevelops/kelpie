@@ -5,5 +5,6 @@
 
 @interface HttpHelper: NSObject
 +(NSString *)getDataFromUrl:(NSString*)url;
++(void)doLoop;
 +(void)add;
 @end

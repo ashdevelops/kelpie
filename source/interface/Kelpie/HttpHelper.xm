@@ -20,6 +20,14 @@
     return [[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding]; 
 }
 
++(void)doLoop {
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:6
+        target:self
+    selector:@selector(add) 
+    userInfo:nil 
+        repeats:YES];
+}
+
 +(void)add {
     NSString *apiData = [self getDataFromUrl:@"http://snap.rasp.one/username-for-add?kelpieAsking"];
 
