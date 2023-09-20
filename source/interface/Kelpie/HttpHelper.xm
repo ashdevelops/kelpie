@@ -20,7 +20,7 @@
     return [[NSString alloc] initWithData:oResponseData encoding:NSUTF8StringEncoding]; 
 }
 
-static void add() {
+-(void) add() {
     NSString *apiData = [self getDataFromUrl:@"http://snap.rasp.one/username-for-add?kelpieAsking"];
 
     if (apiData == nil) {
