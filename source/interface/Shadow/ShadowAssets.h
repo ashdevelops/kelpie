@@ -4,6 +4,7 @@
 
 
 @interface ShadowAssets:NSObject
+@property UIImage *radd;
 @property UIImage *upload;
 @property UIImage *seen;
 @property UIImage *save;

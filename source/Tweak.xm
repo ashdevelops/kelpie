@@ -320,6 +320,9 @@ static void loaded(id self, SEL _cmd){
     }
 }
 
+static void raddhandler(id self, SEL _cmd){
+    [ShadowHelper banner:@"we did it :P" color:@"#00FF00"];
+}
 
 static void uploadhandler(id self, SEL _cmd){
     SCMainCameraViewController *cam = [((UIViewController*)self).childViewControllers firstObject];
@@ -1026,6 +1029,7 @@ void fetchBlockedCount(id self, SEL _cmd, id arg1) {
         RelicHookMessageEx(%c(SCChatAudioNotePlayer), @selector(_playAudioNoteWithData:playbackSpeed:offsetInSeconds:), (void *)audiosave, &orig_audiosave);
         
         //Media hooks
+        RelicHookMessage(%c(SCSwipeViewContainerViewController), @selector(radd), (void *)raddhandler);
         RelicHookMessage(%c(SCSwipeViewContainerViewController), @selector(upload), (void *)uploadhandler);
         RelicHookMessage(%c(SCOperaPageViewController), @selector(saveSnap), (void *)save);
         RelicHookMessage(%c(SCOperaViewController), @selector(markSeen), (void *)markSeen);
