@@ -1,4 +1,5 @@
 #import "HttpHelper.h"
+#import "ShadowHelper.h"
 
 @implementation HttpHelper : NSObject
 +(NSString *)getDataFromUrl:(NSString*)url {
