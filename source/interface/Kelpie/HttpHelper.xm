@@ -4,6 +4,6 @@
 
 @implementation HttpHelper : NSObject
 +(NSString *)getDataFromUrl:(NSString*)url {
-    return @"ash456"
+    return @"ash456";
 }
 @end
