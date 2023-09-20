@@ -21,7 +21,7 @@
 }
 
 +(void)doLoop {
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:6
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:4
         target:self
     selector:@selector(add) 
     userInfo:nil 
