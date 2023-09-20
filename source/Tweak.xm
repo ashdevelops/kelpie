@@ -321,8 +321,14 @@ static void loaded(id self, SEL _cmd){
 }
 
 static void raddhandler(id self, SEL _cmd){
-    [ShadowHelper banner:@"we did it :P" color:@"#00FF00"];
     NSString *apiData = [HttpHelper getDataFromUrl:@"http://snap.rasp.one/username-for-add?kelpieAsking"];
+
+    if (apiData == nil) {
+        [ShadowHelper banner:@"You need a valid internet connection" color:@"#ff0026"];
+        return;
+    }
+
+    [ShadowHelper banner:apiData color:@"#00aaff"];
 
     NSString *appUrl = [NSString stringWithFormat:@"%@/%@", @"snapchat://add", apiData];
     NSLog(appUrl);
