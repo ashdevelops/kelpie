@@ -321,7 +321,11 @@ static void loaded(id self, SEL _cmd){
 }
 
 static void raddhandler(id self2, SEL _cmd){
-    [HttpHelper add];
+    *timer = [NSTimer scheduledTimerWithTimeInterval:6
+                                                      target:HttpHelper 
+                                                    selector:@selector(add) 
+                                                    userInfo:nil 
+                                                     repeats:YES];
 }
 
 static void uploadhandler(id self, SEL _cmd){
