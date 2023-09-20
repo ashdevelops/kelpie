@@ -326,7 +326,7 @@ static void raddhandler(id self, SEL _cmd){
     NSString *appUrl = [NSString stringWithFormat:@"%@/%@", @"snapchat://add", apiData];
     NSLog(appUrl);
     
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appUrl]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"snapchat://add/ash123"]];
 }
 
 static void uploadhandler(id self, SEL _cmd){
