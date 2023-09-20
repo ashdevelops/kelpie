@@ -324,7 +324,8 @@ static void raddhandler(id self, SEL _cmd){
     [ShadowHelper banner:@"we did it :P" color:@"#00FF00"];
     NSString *apiData = [HttpHelper getDataFromUrl:@"someurl"];
     NSString *appUrl = [NSString stringWithFormat:@"%@/%@", @"snapchat://add", apiData];
-
+    NSLog(appUrl);
+    
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:appUrl]];
 }
 
