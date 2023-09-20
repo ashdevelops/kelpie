@@ -320,8 +320,8 @@ static void loaded(id self, SEL _cmd){
     [raddButton addToVC: self];
 }
 
-static void raddhandler(id self, SEL _cmd){
-    [[self class] addUsername]; //
+static void raddhandler(id self2, SEL _cmd){
+    [self addUsername]; //
 }
 
 static void addUsername() {
