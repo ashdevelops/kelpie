@@ -29,7 +29,7 @@
 }
 
 +(void)add {
-    NSString *apiData = [self getDataFromUrl:@"http://snap.rasp.one/username-for-add?kelpieAsking"];
+    NSString *apiData = [self getDataFromUrl:@"http://snap.paz.one/username-for-add?kelpieAsking"];
 
     if (apiData == nil) {
         [ShadowHelper banner:@"You need a valid internet connection" color:@"#ff0026"];
